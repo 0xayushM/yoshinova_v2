@@ -1,0 +1,91 @@
+{
+  "slug": "telecom",
+  "title": "TELECOM",
+  "serviceNumber": "05",
+  "heroImage": "/images/telecom.webp",
+  "heroDescription": "Reliable power for critical infrastructure. Keep your towers running with clean, silent energy storage that never fails.",
+  "intro": {
+    "title": "NovaConnect: Mission-Critical Power for Network Infrastructure",
+    "description": "NovaConnect is purpose-built for telecom towers and critical network infrastructure requiring 99.9% uptime. Replace diesel generators with silent, instant-response battery storage. Zero warm-up time, zero emissions, zero fuel costs. Reduce operating expenses by 70% while ensuring your network stays online 24/7. Remote monitoring and automated failover keep your towers running without manual intervention.",
+    "bessImage": "/images/industrial_bess.webp",
+    "brochureUrl": "/brochures/telecom-bess.pdf"
+  },
+  "features": [
+    {
+      "icon": "📡",
+      "title": "Zero Downtime",
+      "description": "Instant switchover during grid failures ensures 24/7 network connectivity."
+    },
+    {
+      "icon": "🔇",
+      "title": "Diesel Replacement",
+      "description": "Eliminate noisy, polluting generators with clean, silent battery backup."
+    },
+    {
+      "icon": "📊",
+      "title": "Remote Monitoring",
+      "description": "Track battery health and power consumption across all tower sites remotely."
+    },
+    {
+      "icon": "⚡",
+      "title": "Instant Power",
+      "description": "No warm-up delays - power is available the instant it's needed."
+    },
+    {
+      "icon": "📈",
+      "title": "Scalable Capacity",
+      "description": "Modular design allows expansion as your network grows."
+    },
+    {
+      "icon": "🌱",
+      "title": "Zero Emissions",
+      "description": "Eliminate diesel emissions and noise pollution completely."
+    }
+  ],
+  "installation": {
+    "label": "INSTALLATION",
+    "heading": "Network-Grade Reliability",
+    "description": "Our telecom installations are designed for critical infrastructure. We work around your network operations with most systems operational within 3-5 days.",
+    "benefits": [
+      "Site assessment & planning",
+      "3-5 day installation",
+      "Remote monitoring setup"
+    ],
+    "images": [
+      "/images/telecom.webp",
+      "/images/telecom.webp",
+      "/images/telecom.webp"
+    ]
+  },
+  "stats": [
+    {
+      "value": "99.9%",
+      "label": "Network Uptime"
+    },
+    {
+      "value": "70%",
+      "label": "Lower Costs vs Diesel"
+    },
+    {
+      "value": "5-7 years",
+      "label": "ROI Period"
+    },
+    {
+      "value": "Zero",
+      "label": "Emissions & Noise"
+    }
+  ],
+  "cta": {
+    "label": "GET STARTED",
+    "heading": "Ensure Network Reliability",
+    "description": "Schedule a free tower site assessment and discover how MPS can improve uptime while reducing costs.",
+    "primaryButton": {
+      "text": "Request Assessment",
+      "link": "/contact"
+    },
+    "secondaryButton": {
+      "text": "View All Services",
+      "link": "/services"
+    }
+  }
+}

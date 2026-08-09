@@ -1,0 +1,26 @@
+{
+  "title": "LEAD ACID",
+  "subtitle": "REPLACEMENT BATTERY",
+  "headers": ["Range", "12.8V", "25.6V"],
+  "specifications": [
+    { "label": "Model", "values": ["12.8V100Ah", "25.6V100Ah"] },
+    { "label": "Array Mode", "values": ["4S", "8S"] },
+    { "label": "Nominal Energy (kWh)", "values": ["1.28 kWh", "2.56 kWh"] },
+    { "label": "Nominal Voltage (V)", "values": ["12.8V", "25.6V"] },
+    { "label": "Charge Voltage (V)", "values": ["11.1 ± 0.5", "28.2 ± 1"] },
+    { "label": "Discharge Cut-off Voltage (V)", "values": ["14.1 ± 0.5", "22.2 ± 2"] },
+    { "label": "Standard Charging Current(A)", "values": ["20A", "20A"] },
+    { "label": "Max. Continuous Charging Current (A)", "values": ["100A", "100A"] },
+    { "label": "Max. Continuous Discharging Current (A)", "values": ["100A", "100A"] },
+    { "label": "Cycle Life", "values": ["6000 Cycles @80% DOD @25°C @0.2C/0.2C", "6000 Cycles @80% DOD @25°C @0.2C/0.2C"] },
+    { "label": "Communication Mode", "values": ["colSpan:SOC LED Display"] },
+    { "label": "Operating Temp", "values": ["Charging: 0~60°C, Discharging: -10~65°C", "Charging: 0~60°C, Discharging: -10~65°C"] },
+    { "label": "Size(LxWxH) mm", "values": ["314.5 × 180 × 352.4", "460 × 180.4 × 587.8"] },
+    { "label": "Net Weight (kg)", "values": ["16.9", "29.16"] },
+    { "label": "Gross Weight (kg)", "values": ["19.4", "30.72"] },
+    { "label": "Warranty", "values": ["colSpan:5 Years"] },
+    { "label": "Altitude", "values": ["colSpan:≤ 4000m"] },
+    { "label": "Humidity", "values": ["colSpan:< 90%RH"] },
+    { "label": "Shelf Temperature", "values": ["colSpan:10°C ~ 60°C"] }
+  ]
+}

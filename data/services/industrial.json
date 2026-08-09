@@ -1,0 +1,91 @@
+{
+  "slug": "industrial",
+  "title": "INDUSTRIAL",
+  "serviceNumber": "04",
+  "heroImage": "/images/industrial.webp",
+  "heroDescription": "Industrial-scale energy storage that cuts costs, improves power quality, and keeps production running without interruption.",
+  "intro": {
+    "title": "NovaMax: Heavy-Duty Modular Power System",
+    "description": "NovaMax is a high-capacity, industrial-grade Modular Power System engineered for manufacturing plants, processing facilities, and heavy industrial operations. Cut demand charges by up to 40%, eliminate diesel dependency, stabilize power quality for sensitive equipment, and ensure zero-downtime production. Built to handle the most demanding industrial loads with proven reliability and rapid ROI.",
+    "bessImage": "/images/industrial_bess.webp",
+    "brochureUrl": "/brochures/industrial-bess.pdf"
+  },
+  "features": [
+    {
+      "icon": "⚙️",
+      "title": "Demand Charge Reduction",
+      "description": "Slash peak demand charges by up to 40% through intelligent load leveling."
+    },
+    {
+      "icon": "🔌",
+      "title": "Power Quality",
+      "description": "Improve power factor and eliminate voltage fluctuations that damage equipment."
+    },
+    {
+      "icon": "🏭",
+      "title": "Production Continuity",
+      "description": "Keep critical processes running during grid failures - zero downtime."
+    },
+    {
+      "icon": "💡",
+      "title": "Load Shifting",
+      "description": "Run energy-intensive processes during off-peak hours to maximize savings."
+    },
+    {
+      "icon": "📈",
+      "title": "Scalable Capacity",
+      "description": "Modular design allows expansion as your facility grows."
+    },
+    {
+      "icon": "🌍",
+      "title": "Sustainability",
+      "description": "Reduce carbon footprint and meet corporate sustainability goals."
+    }
+  ],
+  "installation": {
+    "label": "INSTALLATION",
+    "heading": "Industrial-Grade Reliability",
+    "description": "Our industrial installations are designed for heavy-duty applications. We work around your production schedule to minimize disruption, with most systems operational within 5-7 days.",
+    "benefits": [
+      "Detailed load analysis",
+      "5-7 day installation",
+      "24/7 monitoring & support"
+    ],
+    "images": [
+      "/images/industrial.webp",
+      "/images/industrial.webp",
+      "/images/industrial.webp"
+    ]
+  },
+  "stats": [
+    {
+      "value": "20-40%",
+      "label": "Energy Cost Reduction"
+    },
+    {
+      "value": "100%",
+      "label": "Uptime During Outages"
+    },
+    {
+      "value": "3-5 years",
+      "label": "Payback Period"
+    },
+    {
+      "value": "Real-time",
+      "label": "Monitoring & Control"
+    }
+  ],
+  "cta": {
+    "label": "GET STARTED",
+    "heading": "Power Your Industrial Operations",
+    "description": "Schedule a free facility energy assessment and discover how MPS can reduce costs and improve reliability.",
+    "primaryButton": {
+      "text": "Request Assessment",
+      "link": "/contact"
+    },
+    "secondaryButton": {
+      "text": "View All Services",
+      "link": "/services"
+    }
+  }
+}

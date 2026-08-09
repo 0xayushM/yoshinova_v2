@@ -1,0 +1,91 @@
+{
+  "slug": "commercial",
+  "title": "COMMERCIAL",
+  "serviceNumber": "03",
+  "heroImage": "/images/commercial.webp",
+  "heroDescription": "Smart energy storage for office buildings, retail centers, and commercial properties. Lower operating costs while enhancing tenant value.",
+  "intro": {
+    "title": "NovaBizGuard: Commercial & Industrial Modular Power System",
+    "description": "NovaBizGuard is a modular Modular Power System (MPS) designed for commercial and industrial customers. NovaBizGuard helps cut demand charges, reduce diesel generator (DG) dependency, lower electricity bills by up to 50%, stabilize power supply, and unlock reliable EV charging and solar + MPS solutions across factories, buildings, and microgrids.",
+    "bessImage": "/images/commercial_bess.webp",
+    "brochureUrl": "/brochures/commercial-bess.pdf"
+  },
+  "features": [
+    {
+      "icon": "💰",
+      "title": "Demand Charge Reduction",
+      "description": "Cut peak demand charges by 25-35% through intelligent load management."
+    },
+    {
+      "icon": "🏢",
+      "title": "Tenant Value",
+      "description": "Enhance property appeal with sustainable, reliable power infrastructure."
+    },
+    {
+      "icon": "⚡",
+      "title": "Time-of-Use Optimization",
+      "description": "Automatically charge during off-peak hours and discharge during expensive periods."
+    },
+    {
+      "icon": "🔒",
+      "title": "Business Continuity",
+      "description": "Keep elevators, HVAC, and critical systems running during outages."
+    },
+    {
+      "icon": "🌿",
+      "title": "Green Certification",
+      "description": "Earn LEED credits and demonstrate environmental responsibility."
+    },
+    {
+      "icon": "📊",
+      "title": "Tenant Billing",
+      "description": "Track and allocate energy costs accurately across multiple tenants."
+    }
+  ],
+  "installation": {
+    "label": "INSTALLATION",
+    "heading": "Minimal Disruption, Maximum Impact",
+    "description": "Our commercial installations are designed to integrate seamlessly with your building operations. Most systems are operational within 3-5 days with zero downtime.",
+    "benefits": [
+      "Comprehensive energy audit",
+      "3-5 day installation",
+      "Tenant communication support"
+    ],
+    "images": [
+      "/images/commercial.webp",
+      "/images/commercial.webp",
+      "/images/commercial.webp"
+    ]
+  },
+  "stats": [
+    {
+      "value": "25-35%",
+      "label": "Demand Charge Reduction"
+    },
+    {
+      "value": "Seamless",
+      "label": "Backup Transition"
+    },
+    {
+      "value": "4-6 years",
+      "label": "Average ROI"
+    },
+    {
+      "value": "Carbon-free",
+      "label": "Backup Power"
+    }
+  ],
+  "cta": {
+    "label": "GET STARTED",
+    "heading": "Transform Your Commercial Property",
+    "description": "Schedule a free building energy assessment and discover how MPS can reduce operating costs and increase property value.",
+    "primaryButton": {
+      "text": "Request Assessment",
+      "link": "/contact"
+    },
+    "secondaryButton": {
+      "text": "View All Services",
+      "link": "/services"
+    }
+  }
+}

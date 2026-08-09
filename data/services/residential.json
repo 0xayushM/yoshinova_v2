@@ -1,0 +1,91 @@
+{
+  "slug": "residential",
+  "title": "RESIDENTIAL",
+  "serviceNumber": "02",
+  "heroImage": "/images/residential.webp",
+  "heroDescription": "Energy independence for your home. Store solar power, cut peak-hour costs, and never worry about outages again.",
+  "intro": {
+    "title": "NovaVault: Residential Modular Power System",
+    "description": "NovaVault is a compact, intelligent Modular Power System designed for residential applications. Store solar energy during the day and use it at night, reduce peak-hour electricity costs, and ensure your home stays powered during outages. With seamless solar integration and smart energy management, NovaVault gives you complete control over your household energy consumption.",
+    "bessImage": "/images/residential_bess.webp",
+    "brochureUrl": "/brochures/residential-bess.pdf"
+  },
+  "features": [
+    {
+      "icon": "⚡",
+      "title": "Peak Shaving",
+      "description": "Reduce electricity bills by up to 50% through intelligent load shifting during peak-rate hours."
+    },
+    {
+      "icon": "🔋",
+      "title": "Backup Power",
+      "description": "Seamless automatic switchover during outages - keep your home running 24/7."
+    },
+    {
+      "icon": "☀️",
+      "title": "Solar Integration",
+      "description": "Maximize solar investment by storing excess energy for use after sunset."
+    },
+    {
+      "icon": "📱",
+      "title": "Smart Management",
+      "description": "Monitor and control energy usage in real-time through our intuitive app."
+    },
+    {
+      "icon": "🌱",
+      "title": "Eco-Friendly",
+      "description": "Reduce carbon footprint and contribute to a sustainable energy future."
+    },
+    {
+      "icon": "🔒",
+      "title": "Energy Security",
+      "description": "True energy independence - never worry about grid failures again."
+    }
+  ],
+  "installation": {
+    "label": "INSTALLATION",
+    "heading": "Simple, Professional, Hassle-Free",
+    "description": "Our team handles everything from initial energy assessment and system sizing to installation and commissioning. Most residential systems are up and running within 2-3 days.",
+    "benefits": [
+      "Free energy assessment",
+      "2-3 day installation",
+      "Full compliance & training"
+    ],
+    "images": [
+      "/images/residential.webp",
+      "/images/residential.webp",
+      "/images/residential.webp"
+    ]
+  },
+  "stats": [
+    {
+      "value": "30-50%",
+      "label": "Bill Reduction"
+    },
+    {
+      "value": "24/7",
+      "label": "Power Supply"
+    },
+    {
+      "value": "10+",
+      "label": "Year Lifespan"
+    },
+    {
+      "value": "Zero",
+      "label": "Maintenance Hassle"
+    }
+  ],
+  "cta": {
+    "label": "GET STARTED",
+    "heading": "Ready To Take Control Of Your Energy?",
+    "description": "Schedule a free home energy assessment and discover how much you can save with a customized MPS solution.",
+    "primaryButton": {
+      "text": "Request Assessment",
+      "link": "/contact"
+    },
+    "secondaryButton": {
+      "text": "View All Services",
+      "link": "/services"
+    }
+  }
+}

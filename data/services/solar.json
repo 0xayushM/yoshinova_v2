@@ -1,0 +1,91 @@
+{
+  "slug": "solar",
+  "title": "SOLAR",
+  "serviceNumber": "06",
+  "heroImage": "/images/solar.webp",
+  "heroDescription": "Complete solar-plus-storage solutions. Generate clean energy during the day, use it whenever you need it — day or night.",
+  "intro": {
+    "title": "NovaGrid: Integrated Solar & Storage Solution",
+    "description": "NovaGrid combines solar generation with intelligent battery storage to maximize your renewable energy investment. Achieve 80-90% solar self-consumption by storing excess daytime generation for evening use. Stop exporting valuable solar energy to the grid at low rates — store it and use it when electricity prices peak. Complete energy independence with zero fossil fuel dependency and 24/7 clean power availability.",
+    "bessImage": "/images/grid_bess.webp",
+    "brochureUrl": "/brochures/solar-bess.pdf"
+  },
+  "features": [
+    {
+      "icon": "☀️",
+      "title": "Maximum Solar Utilization",
+      "description": "Store excess solar energy for use after sunset - achieve 80-90% self-consumption."
+    },
+    {
+      "icon": "🔋",
+      "title": "24/7 Clean Energy",
+      "description": "Use your own solar power around the clock, not just when the sun shines."
+    },
+    {
+      "icon": "💰",
+      "title": "Enhanced ROI",
+      "description": "Add 2-3 years of additional ROI to your solar investment through storage."
+    },
+    {
+      "icon": "🌙",
+      "title": "Night-Time Power",
+      "description": "Run your home or business on stored solar energy after dark."
+    },
+    {
+      "icon": "⚡",
+      "title": "Grid Independence",
+      "description": "Reduce reliance on the grid and protect against rising electricity rates."
+    },
+    {
+      "icon": "🌍",
+      "title": "Zero Emissions",
+      "description": "Completely eliminate fossil fuel dependency with 100% clean energy."
+    }
+  ],
+  "installation": {
+    "label": "INSTALLATION",
+    "heading": "Seamless Solar Integration",
+    "description": "Our solar-plus-storage systems integrate perfectly with new or existing solar installations. Most systems are operational within 2-4 days.",
+    "benefits": [
+      "Solar compatibility check",
+      "2-4 day installation",
+      "Optimized system sizing"
+    ],
+    "images": [
+      "/images/solar.webp",
+      "/images/solar.webp",
+      "/images/solar.webp"
+    ]
+  },
+  "stats": [
+    {
+      "value": "80-90%",
+      "label": "Solar Self-Consumption"
+    },
+    {
+      "value": "2-3 years",
+      "label": "Additional ROI"
+    },
+    {
+      "value": "24/7",
+      "label": "Clean Energy"
+    },
+    {
+      "value": "Zero",
+      "label": "Fossil Fuel Dependency"
+    }
+  ],
+  "cta": {
+    "label": "GET STARTED",
+    "heading": "Maximize Your Solar Investment",
+    "description": "Schedule a free solar-plus-storage assessment and discover how much more you can save with battery storage.",
+    "primaryButton": {
+      "text": "Request Assessment",
+      "link": "/contact"
+    },
+    "secondaryButton": {
+      "text": "View All Services",
+      "link": "/services"
+    }
+  }
+}

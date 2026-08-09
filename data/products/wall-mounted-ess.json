@@ -1,0 +1,27 @@
+{
+  "title": "Home Energy",
+  "subtitle": "Storage System <span class=\"text-[#E31E24]\">(Wall Mounted)</span>",
+  "headers": ["Range", "25.6V", "51.2V"],
+  "specifications": [
+    { "label": "Model", "values": ["25.6V200Ah", "51.2V100Ah"] },
+    { "label": "Array Mode", "values": ["8S", "16S"] },
+    { "label": "Nominal Energy (kWh)", "values": ["5.12 kWh", "5.12 kWh"] },
+    { "label": "Nominal Voltage (V)", "values": ["25.6V", "51.2V"] },
+    { "label": "Charge Voltage (V)", "values": ["28.2 ± 1", "56.4± 1"] },
+    { "label": "Discharge Cut-off Voltage (V)", "values": ["22.4 ± 2", "44.4 ± 2"] },
+    { "label": "Standard Charging Current(A)", "values": ["20A", "20A"] },
+    { "label": "Max. Continuous Charging Current (A)", "values": ["100A", "100A"] },
+    { "label": "Max. Continuous Discharging Current (A)", "values": ["100A", "100A"] },
+    { "label": "Cycle Life", "values": ["6000 Cycles @80% DOD @25°C @0.2C/0.2C", "6000 Cycles @80% DOD @25°C @0.2C/0.2C"] },
+    { "label": "Communication Mode", "values": ["colSpan:RS485 / CAN / RS232, LCD Touch Display"] },
+    { "label": "Parallel Connection", "values": ["colSpan:Yes, upto 15 units"] },
+    { "label": "Operating Temp", "values": ["colSpan:Charging: 0~60°C, Discharging: -10~65°C"] },
+    { "label": "Size(LxWxH) mm", "values": ["500 × 188 × 630", "500 × 188 × 630"] },
+    { "label": "Net Weight (kg)", "values": ["52.44 kg", "52.44 kg"] },
+    { "label": "Gross Weight (kg)", "values": ["55.5 kg + Accessories", "55.5 kg + Accessories"] },
+    { "label": "Warranty", "values": ["colSpan:5 Years"] },
+    { "label": "Altitude", "values": ["colSpan:≤ 4000m"] },
+    { "label": "Humidity", "values": ["colSpan:< 90%RH"] },
+    { "label": "Shelf Temperature", "values": ["colSpan:10°C~60°C"] }
+  ]
+}
