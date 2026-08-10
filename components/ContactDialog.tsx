@@ -94,7 +94,10 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
           <div className="p-8 md:p-10">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <h3 className="text-white text-[clamp(1.25rem,2.6vw,1.625rem)] font-bold tracking-wide mb-2">
+                {/* was `text-white` — a leftover from when this dialog sat on
+                    the old dark theme. On the paper panel it rendered white
+                    on near-white and the heading was effectively invisible. */}
+                <h3 className="t-h3 mb-2 !text-ink">
                   {type === 'energy-audit' ? 'Request Energy Audit' : 'Contact Us'}
                 </h3>
                 <p className="t-body mt-2 text-sm">
@@ -138,7 +141,7 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
                 <p className="text-brand-deep text-sm">Form submitted successfully!</p>
               )}
               {submitStatus === 'error' && (
-                <p className="text-red-400 text-sm">Failed to submit. Please try again.</p>
+                <p className="text-rust text-sm">Failed to submit. Please try again.</p>
               )}
 
               <button

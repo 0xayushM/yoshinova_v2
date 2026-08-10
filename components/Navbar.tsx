@@ -250,7 +250,15 @@ export default function Navbar() {
           mobileOpen ? "scale-y-100" : "pointer-events-none scale-y-0"
         }`}
       >
-        <div className="flex h-full flex-col justify-center px-6 pb-28">
+        {/* The sheet sits under the nav bar (z-9985 vs z-9990), so its content
+            has to start below it — without top clearance the first service
+            ran straight under the logo. Two elements, not one: the outer box
+            scrolls, the inner box centres via `min-h-full`. A single
+            `justify-center` box that overflows is unreachable at the top,
+            because flex centring pushes the overflow out both ends and only
+            the bottom half can be scrolled to. */}
+        <div className="h-full overflow-y-auto overscroll-contain px-6 pb-28 pt-24">
+          <div className="flex min-h-full flex-col justify-center">
           <ul className="space-y-1">
             {services.map((s) => (
               <li key={s.slug}>
@@ -286,6 +294,7 @@ export default function Navbar() {
           >
             Request Free Audit
           </button>
+          </div>
         </div>
       </div>
 

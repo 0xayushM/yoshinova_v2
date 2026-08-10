@@ -4,7 +4,7 @@ import { CurtainLink } from '@/components/Curtain';
 
 export default function ServiceFooter() {
   return (
-    <footer className="w-full bg-[#0a0a0a] px-6 sm:px-8 md:px-10 lg:px-14 py-12 md:py-16 border-t border-white/10">
+    <footer className="mobile-bar-clearance w-full bg-[#0a0a0a] px-6 sm:px-8 md:px-10 lg:px-14 py-12 md:py-16 border-t border-white/10">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 lg:gap-12 mb-10 md:mb-12">
           <div className="sm:col-span-2 md:col-span-2">

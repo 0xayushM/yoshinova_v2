@@ -9,7 +9,7 @@ export default function Section13() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
-    <footer className="slide-over relative overflow-hidden bg-ink pt-20 md:pt-28">
+    <footer className="slide-over mobile-bar-clearance relative overflow-hidden bg-ink pt-20 md:pt-28">
       <div className="mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
           {/* the ask */}
@@ -86,26 +86,47 @@ export default function Section13() {
           </Reveal>
         </div>
 
-        {/* wordmark */}
-        <div className="relative mt-20 overflow-hidden border-t border-white/12 pt-10">
-          <p
-            aria-hidden
-            className="select-none text-center text-transparent"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(3rem, 15vw, 13rem)",
-              // leading-[0.78] cropped the caps inside the overflow-hidden
-              // parent; 1.02 with a touch of top padding clears them.
-              lineHeight: 1.02,
-              paddingTop: "0.06em",
-              letterSpacing: "-0.04em",
-              backgroundImage: "linear-gradient(to bottom, rgba(245,245,242,.85), rgba(245,245,242,.04))",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-            }}
+        {/* ── wordmark ──
+            Drawn as SVG text, not HTML text.
+
+            Sizing it with `clamp(3rem, 15vw, 13rem)` was a guess about how
+            wide nine capitals of a display face would render, and the guess
+            was wrong on narrow screens: the word came out a few pixels wider
+            than its column and the final A was sliced off by the parent's
+            overflow-hidden. It also can't be right in general — the answer
+            depends on the font's metrics, not on the viewport.
+
+            An SVG viewBox makes the fit exact by construction: the artwork
+            is declared 1000×160 and scaled to whatever width the column
+            happens to be, so it lands flush at every size. `textLength`
+            pins the glyph run to the full 1000 units, so the word always
+            spans the column edge to edge — no clipping, no short measure. */}
+        <div className="relative mt-20 border-t border-white/12 pt-10">
+          <svg
+            viewBox="0 0 1000 160"
+            className="block w-full select-none"
+            role="img"
+            aria-label="Yoshinova"
+            preserveAspectRatio="xMidYMid meet"
           >
-            YOSHINOVA
-          </p>
+            <defs>
+              <linearGradient id="wordmark-fade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#F5F5F2" stopOpacity="0.85" />
+                <stop offset="100%" stopColor="#F5F5F2" stopOpacity="0.04" />
+              </linearGradient>
+            </defs>
+            <text
+              x="500"
+              y="130"
+              textAnchor="middle"
+              textLength="1000"
+              lengthAdjust="spacingAndGlyphs"
+              fill="url(#wordmark-fade)"
+              style={{ fontFamily: "var(--font-display)", fontSize: "150px", letterSpacing: "-0.04em" }}
+            >
+              YOSHINOVA
+            </text>
+          </svg>
         </div>
 
         <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-6 sm:flex-row">

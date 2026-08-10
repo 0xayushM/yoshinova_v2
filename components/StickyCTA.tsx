@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { track } from "@/lib/analytics";
+import ContactDialog from "./ContactDialog";
 
 const PHONE = "+919718204687";
 const WHATSAPP = "https://wa.me/919718204687";
@@ -52,48 +54,85 @@ function DownloadIcon({ className = "" }: { className?: string }) {
 }
 
 export default function StickyCTA() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   return (
     <>
-      {/* ══ mobile: floating action card ══
-          Inset from the edges with a shadow rather than an edge-to-edge
-          strip — a full-bleed bar reads as browser chrome and flattens
-          against the page. WhatsApp takes the width because it's the channel
-          this market actually uses; call and brochure are square icon
-          buttons beside it. */}
+      {/* ══ mobile: one capsule, four segments ══
+          This used to be three separate pills with gaps between them, which
+          read as three unrelated objects fighting over the same corner. One
+          capsule reads as one control offering four ways in.
+
+          The wide segment is the audit request, not WhatsApp. WhatsApp was
+          carrying a two-line label only to fill the leftover width, which
+          spent the most valuable real estate on the bar describing a channel
+          rather than asking for the conversion. The three contact channels
+          are self-evident from their glyphs, so they shrink to icons and the
+          freed width goes to the actual ask.
+
+          `overflow-hidden` on the rounded container is what lets the green
+          segment run flush into the capsule's left end without carrying its
+          own radius. The dividers are the container's own background showing
+          through 1px gaps — borders on the children would double up against
+          the outer edge. */}
       <nav
         aria-label="Quick contact"
-        className="fixed inset-x-3 bottom-3 z-[80] flex items-stretch gap-2 md:hidden"
+        className="fixed inset-x-3 bottom-3 z-[80] flex overflow-hidden rounded-full bg-hair shadow-[0_12px_34px_-10px_rgba(20,22,15,.5)] md:hidden"
         style={{ bottom: "calc(0.75rem + env(safe-area-inset-bottom))" }}
       >
+        <button
+          onClick={() => {
+            track("audit_request", { location: "mobile_bar" });
+            setDialogOpen(true);
+          }}
+          className="flex min-h-[3.4rem] min-w-0 flex-1 items-center justify-center bg-brand px-3 text-white transition-[filter] duration-200 active:brightness-95"
+        >
+          {/* 20 uppercase characters at 0.18em tracking is a wide label for
+              the ~190px this segment gets on a 360px phone, so the size is
+              fluid rather than fixed — it eases down to 9px on the narrowest
+              handsets instead of wrapping to two lines. */}
+          <span
+            className="t-label whitespace-nowrap !text-white"
+            style={{ fontSize: "clamp(9px, 2.6vw, 10.5px)" }}
+          >
+            Request Energy Audit
+          </span>
+        </button>
+
+        <span className="w-px shrink-0" aria-hidden />
+
+        {/* the glyph stays brand-green on paper so it still reads as
+            WhatsApp without a word next to it */}
         <a
           href={WHATSAPP}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => track("whatsapp_click", { location: "mobile_bar" })}
-          className="flex flex-1 items-center gap-3 rounded-full bg-brand px-5 py-3.5 text-white shadow-[0_10px_30px_-10px_rgba(20,22,15,.55)] active:scale-[.98] transition-transform duration-200"
+          aria-label="Message Yoshinova on WhatsApp"
+          className="flex w-[3.1rem] shrink-0 items-center justify-center bg-paper text-brand-deep transition-colors duration-200 active:bg-paper-2"
         >
-          <WhatsAppIcon className="h-5 w-5 shrink-0" />
-          <span className="flex flex-col leading-tight">
-            <span className="t-label !text-[10px] !text-white">WhatsApp us</span>
-            <span className="text-[11px] text-white/80">Reply within a day</span>
-          </span>
+          <WhatsAppIcon className="h-5 w-5" />
         </a>
+
+        <span className="w-px shrink-0" aria-hidden />
 
         <a
           href={`tel:${PHONE}`}
           onClick={() => track("call_click", { location: "mobile_bar" })}
           aria-label="Call Yoshinova"
-          className="flex aspect-square w-[3.4rem] shrink-0 items-center justify-center rounded-full border border-hair bg-paper text-ink shadow-[0_10px_30px_-12px_rgba(20,22,15,.45)] active:scale-[.98] transition-transform duration-200"
+          className="flex w-[3.1rem] shrink-0 items-center justify-center bg-paper text-ink transition-colors duration-200 active:bg-paper-2"
         >
           <PhoneIcon className="h-5 w-5" />
         </a>
+
+        <span className="w-px shrink-0" aria-hidden />
 
         <a
           href={BROCHURE}
           download
           onClick={() => track("brochure_download", { location: "mobile_bar" })}
           aria-label="Download the MPS brochure"
-          className="flex aspect-square w-[3.4rem] shrink-0 items-center justify-center rounded-full border border-hair bg-paper text-ink shadow-[0_10px_30px_-12px_rgba(20,22,15,.45)] active:scale-[.98] transition-transform duration-200"
+          className="flex w-[3.1rem] shrink-0 items-center justify-center bg-paper pr-1 text-ink transition-colors duration-200 active:bg-paper-2"
         >
           <DownloadIcon className="h-5 w-5" />
         </a>
@@ -131,6 +170,12 @@ export default function StickyCTA() {
           </span>
         </a>
       </div>
+
+      <ContactDialog
+        isOpen={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        type="energy-audit"
+      />
     </>
   );
 }

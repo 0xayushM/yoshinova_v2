@@ -281,9 +281,14 @@ export default function HeroMosaic() {
                 We audit your floor free, then size a Modular Power System to
                 the load curve we measured. Diesel out, peak charges down.
               </p>
-
+              <div className="opacity-0 md:hidden" style={{ marginTop: "clamp(1rem, 3svh, 2rem)" }}>
+                <div className="">.</div>
+                <div className="">.</div>
+                <div className="">.</div>
+                <div className="">.</div>
+              </div>
               <div
-                className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap"
+                className="hidden md:flex flex-col gap-2.5 sm:flex-row sm:flex-wrap"
                 style={{ marginTop: "clamp(1rem, 3svh, 2rem)" }}
               >
                 <button className="btn btn--primary" onClick={() => setDialogOpen(true)}>

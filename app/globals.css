@@ -51,15 +51,20 @@
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body {
     margin: 0; padding: 0; overflow-x: hidden;
-    /* clears the fixed mobile contact bar so it can never sit over the footer */
-    padding-bottom: calc(var(--mobile-bar-h, 5rem) + env(safe-area-inset-bottom));
     background: var(--color-paper);
     color: var(--color-ink-2);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+  /* Clearance for the fixed mobile contact bar.
+     This used to live on `body` as padding-bottom, which reserved the space
+     OUTSIDE the last section — so under the dark footer you got a strip of
+     paper-coloured body background. Putting it on the footer instead means
+     the footer's own background runs all the way to the bottom edge and the
+     bar floats over its own colour. */
+  .mobile-bar-clearance { padding-bottom: calc(var(--mobile-bar-h, 4.6rem) + env(safe-area-inset-bottom)); }
   @media (min-width: 768px) {
-    body { padding-bottom: 0; }
+    .mobile-bar-clearance { padding-bottom: 0; }
   }
 
   h1,h2,h3,h4,h5,h6 {
