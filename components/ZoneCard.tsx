@@ -1,7 +1,6 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
+import Image from "next/image";
 
 interface ZoneCardProps {
   zoneNumber: string;
@@ -11,33 +10,52 @@ interface ZoneCardProps {
   onClick?: () => void;
 }
 
-const ZoneCard: React.FC<ZoneCardProps> = ({ zoneNumber, title, description, imagePath, onClick }) => {
+/**
+ * Zone card with a slide-over reveal: the plate sits greyscale until you
+ * approach it, then a paper panel slides up from the bottom edge carrying
+ * the description while the image regains colour.
+ */
+export default function ZoneCard({
+  zoneNumber,
+  title,
+  description,
+  imagePath,
+  onClick,
+}: ZoneCardProps) {
   return (
-    <div
-      className="relative overflow-hidden p-4 md:p-5 lg:p-6 flex flex-col justify-between group cursor-pointer"
+    <button
       onClick={onClick}
+      className="group relative block h-full w-full overflow-hidden bg-paper-2 text-left"
     >
-      <div className="absolute inset-0">
-        <Image
-          src={imagePath}
-          alt={title}
-          fill
-          loading="lazy"
-          className="object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-300 ease-out"
-          sizes="(max-width: 768px) 50vw, 25vw"
-          quality={75}
-        />
-      </div>
-      <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300 ease-out" />
-      <div className="relative z-10">
-        <p className="text-[#6A9F30] text-[10px] md:text-xs uppercase tracking-wider mb-1 md:mb-2">ZONE {zoneNumber}</p>
-        <h3 className="text-white text-lg md:text-xl lg:text-2xl uppercase font-medium mb-1 md:mb-2">
-          {title}
-        </h3>
-        <p className="text-white/70 text-xs md:text-sm leading-snug">{description}</p>
-      </div>
-    </div>
-  );
-};
+      <Image
+        src={imagePath}
+        alt={title}
+        fill
+        sizes="(max-width: 1024px) 50vw, 25vw"
+        className="object-cover grayscale transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:grayscale-0"
+        loading="lazy"
+      />
+      {/* legibility scrim, lighter than the old solid black */}
+      <span className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" />
 
-export default ZoneCard;
+      <span className="absolute left-4 top-4 t-label !text-white/70">
+        Zone {zoneNumber}
+      </span>
+
+      {/* the slide-over panel */}
+      <span className="absolute inset-x-0 bottom-0 p-4">
+        <span className="block text-white text-lg leading-tight md:text-xl">
+          {title}
+        </span>
+        <span className="mt-1 grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:grid-rows-[1fr]">
+          <span className="overflow-hidden">
+            <span className="block pt-1.5 text-[13px] leading-snug text-white/80">
+              {description}
+            </span>
+          </span>
+        </span>
+        <span className="mt-2 block h-px w-0 bg-brand transition-[width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full" />
+      </span>
+    </button>
+  );
+}

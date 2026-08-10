@@ -1,7 +1,6 @@
 "use client";
 
 import Image from 'next/image';
-import PageNavbar from '@/components/PageNavbar';
 import ServiceHero from '@/components/service/ServiceHero';
 import ServiceCTA from '@/components/service/ServiceCTA';
 import ServiceFooter from '@/components/service/ServiceFooter';
@@ -13,6 +12,7 @@ import HowItWorks from '@/components/service/sections/HowItWorks';
 import LiveMetricGraph from '@/components/service/sections/LiveMetricGraph';
 
 import industrialData from '@/data/services/industrial.json';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const industrialUseCases = [
   {
@@ -97,7 +97,16 @@ export default function IndustrialPage() {
 
   return (
     <>
-      <PageNavbar />
+      <div className="absolute inset-x-0 top-0 z-30 mx-auto max-w-[1600px] px-5 pt-24 sm:px-8 md:px-10 lg:px-14">
+        <Breadcrumbs
+          tone="paper"
+          crumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Services', href: '/services' },
+            { label: 'Industrial' },
+          ]}
+        />
+      </div>
       <main className="relative min-h-screen bg-[#0a0a0a]">
 
           <ServiceHero

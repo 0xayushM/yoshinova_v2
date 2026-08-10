@@ -1,181 +1,103 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from 'react';
-import SplitText from './SplitText';
-import ContactDialog from './ContactDialog';
-import { CurtainLink } from './Curtain';
+import React from "react";
+import HeroMosaic from "./HeroMosaic";
+import { Reveal, CountUp } from "./motion/Reveal";
 
-interface Section1Props {
-  loadingComplete?: boolean;
-}
+/**
+ * Hero = the scroll-driven mosaic, followed by the metric band.
+ *
+ * The band is the bridge into "the dual bleed", so it's built as an
+ * instrument panel rather than four boxes: an index per reading, a hairline
+ * that fills on approach, and the tone carrying the meaning — rust is what
+ * you're paying, green is what you keep.
+ */
+const METRICS = [
+  {
+    n: "01",
+    v: <><CountUp to={28} prefix="₹" />–28</>,
+    k: "per unit on diesel",
+    sub: "at ₹92/L, 0.28 L per kWh",
+    tone: "rust" as const,
+  },
+  {
+    n: "02",
+    v: <><CountUp to={1.2} decimals={1} />×</>,
+    k: "minimum peak-hour ToD multiplier",
+    sub: "Electricity (Rights of Consumers) Rules",
+    tone: "rust" as const,
+  },
+  {
+    n: "03",
+    v: <>−<CountUp to={40} />%</>,
+    k: "typical peak demand after MPS",
+    sub: "measured against unmanaged load",
+    tone: "brand" as const,
+  },
+  {
+    n: "04",
+    v: <>₹<CountUp to={0} /></>,
+    k: "cost of the audit that proves it",
+    sub: "the report is yours either way",
+    tone: "brand" as const,
+  },
+];
 
-const Section1 = ({ loadingComplete = false }: Section1Props) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const bgRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let rafId: number | null = null;
-    
-    const handleScroll = (e: Event) => {
-      if (rafId !== null) return; // Skip if already scheduled
-      
-      rafId = requestAnimationFrame(() => {
-        const offset = (e as CustomEvent).detail?.offset ?? 0;
-        if (!sectionRef.current || !bgRef.current) {
-          rafId = null;
-          return;
-        }
-
-        const rect = sectionRef.current.getBoundingClientRect();
-        const vh = window.innerHeight;
-        // For Section1: use how far the section has scrolled out of view
-        const progress = Math.max(0, Math.min(1, -rect.top / vh));
-        // Background moves slower: only shift down by 30% of scroll
-        const parallaxY = progress * vh * 0.3;
-        bgRef.current.style.transform = `translateY(${parallaxY}px)`;
-        rafId = null;
-      });
-    };
-
-    window.addEventListener('drei-scroll', handleScroll);
-    return () => {
-      window.removeEventListener('drei-scroll', handleScroll);
-      if (rafId !== null) cancelAnimationFrame(rafId);
-    };
-  }, []);
-
+export default function Section1() {
   return (
-    <section ref={sectionRef} className="w-screen min-h-[100svh] relative overflow-hidden">
-      {/* Background Video (parallax layer) */}
-      <div ref={bgRef} className="absolute will-change-transform" style={{ top: '-15%', left: 0, right: 0, height: '130%' }}>
-      <video
-        className="w-full h-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        poster="/video/yoshinova_hero_poster.jpg"
-      >
-        <source src="/video/yoshinova_hero.mp4" type="video/mp4" />
-      </video>
-      </div>
+    <>
+      <HeroMosaic />
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/30" />
+      <section className="relative bg-paper pb-16 pt-10 md:pb-20">
+        <div className="mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
+          <Reveal dir="none">
+            <p className="t-label tick-row">What the numbers say</p>
+          </Reveal>
 
-      {/* Content layer */}
-      <div className="relative z-10 w-full min-h-[100svh] flex flex-col justify-center py-24 md:py-28">
+          <dl className="grid grid-cols-1 gap-px border-y border-hair bg-hair sm:grid-cols-2 lg:grid-cols-4">
+            {METRICS.map((m, i) => (
+              <Reveal
+                key={m.n}
+                dir="up"
+                delay={i * 90}
+                className="group relative flex flex-col justify-between bg-paper px-6 py-8 transition-colors duration-500 hover:bg-sheet"
+              >
+                <div className="flex items-start justify-between">
+                  <span className="t-label">{m.n}</span>
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      m.tone === "rust" ? "bg-rust" : "bg-brand"
+                    }`}
+                  />
+                </div>
 
-        {/* YOSHINOVA label — sits above the border line */}
-        <p className="text-white text-sm md:text-base lg:text-xl font-bold uppercase tracking-widest mb-3 px-4 sm:px-6 md:px-8 lg:pl-12">
-          YOSHINOVA
-        </p>
+                <dt
+                  className={`tnum mt-10 text-[clamp(2rem,4.6vw,3.1rem)] leading-none tracking-[-0.04em] ${
+                    m.tone === "rust" ? "text-rust" : "text-brand-deep"
+                  }`}
+                >
+                  {m.v}
+                </dt>
 
-        {/* Main row: headline left, description right */}
-        <div className="flex justify-between flex-col xl:flex-row border-t border-white/20">
-
-          {/* Left: Main headline */}
-          <div className="flex-2 xl:flex-3 pt-4 flex flex-col justify-start w-full px-4 sm:px-6 md:px-8 lg:pl-12 leading-none">
-
-            {loadingComplete ? (
-              <SplitText
-                text="Your Energy"
-                tag="h1"
-                className="text-white text-[clamp(2rem,6vw,4rem)] font-medium leading-[1.1] tracking-tighter uppercase"
-                delay={70}
-                duration={1}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-100px"
-                textAlign="left"
-              />
-            ) : (
-              <h1 className="text-white text-[clamp(2rem,6vw,4rem)] font-medium leading-[1.1] tracking-tight uppercase opacity-0">
-                Your Energy
-              </h1>
-            )}
-            {loadingComplete ? (
-              <SplitText
-                text="Profitability Partner"
-                tag="h1"
-                className="text-white text-[clamp(2rem,6vw,4rem)] font-medium leading-[1.1] tracking-tighter uppercase -mt-2"
-                delay={70}
-                duration={1}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-100px"
-                textAlign="left"
-              />
-            ) : (
-              <h1 className="text-transparent text-[clamp(2rem,6vw,4rem)] font-medium leading-[1.1] tracking-tighter uppercase opacity-0 -mt-2">
-                Profitability Partner
-              </h1>
-            )}
-            <p className="text-white/60 text-xs sm:text-sm md:text-base font-light tracking-wide mt-4 uppercase">
-              Energy Audit &nbsp;·&nbsp; MPS Deployment &nbsp;·&nbsp; India
-            </p>
-          </div>
-
-          {/* Right: description */}
-          <div className="flex-1 flex-shrink-0 group">
-            <p className="text-white text-[clamp(0.875rem,1.8vw,1.0625rem)] font-light tracking-tight text-left mr-auto my-4 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-8 xl:border-l xl:border-white/50">
-              Advanced modular power systems designed for industrial, commercial, and residential applications. Eliminate diesel dependency, optimize power costs, and create revenue-generating assets through intelligent energy management.
-            </p>
-          </div>
+                <dd className="mt-4">
+                  {/* accent rule draws itself in as the card is approached */}
+                  <span
+                    className={`block h-px w-8 transition-[width] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full ${
+                      m.tone === "rust" ? "bg-rust/50" : "bg-brand/50"
+                    }`}
+                  />
+                  <span className="mt-3 block text-[13.5px] leading-snug text-ink">
+                    {m.k}
+                  </span>
+                  <span className="mt-1.5 block text-[11.5px] leading-snug text-ink-3">
+                    {m.sub}
+                  </span>
+                </dd>
+              </Reveal>
+            ))}
+          </dl>
         </div>
-
-        {/* Hero CTAs — the live site's first screen had no action at all.
-            Primary is the audit (the actual ask), then contact, then the
-            brochure for the researcher who isn't ready to talk yet. */}
-        <div className="mt-6 flex flex-col gap-2.5 px-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3 sm:px-6 md:px-8 lg:pl-12">
-          <button
-            onClick={() => setDialogOpen(true)}
-            className="btn-slide btn-slide--solid inline-flex items-center justify-center bg-[#6A9F30] px-5 py-3 md:px-7 md:py-3.5 text-white text-xs md:text-sm uppercase tracking-widest cursor-pointer"
-          >
-            Request Free Audit
-          </button>
-
-          <CurtainLink
-            href="/contact"
-            className="btn-slide btn-slide--light inline-flex items-center justify-center border border-white/60 px-5 py-3 md:px-7 md:py-3.5 text-white text-xs md:text-sm uppercase tracking-widest"
-          >
-            Contact Us
-          </CurtainLink>
-
-          <a
-            href="/brochure/yoshinova-mps-brochure.pdf"
-            download
-            className="group inline-flex items-center justify-center gap-2 border border-white/30 px-5 py-3 md:px-7 md:py-3.5 text-white/85 text-xs md:text-sm uppercase tracking-widest transition-colors duration-300 hover:border-white/70 hover:text-white"
-          >
-            Download Brochure
-            <svg
-              className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-y-0.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <ContactDialog
-        isOpen={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-        type="energy-audit"
-      />
-    </section>
+      </section>
+    </>
   );
-};
-
-export default Section1;
+}

@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-import PageNavbar from '@/components/PageNavbar';
 import SplitText from '@/components/SplitText';
 import TeamSection from '@/components/TeamSection';
 import ServiceFooter from '@/components/service/ServiceFooter';
@@ -44,7 +43,6 @@ export default function AboutPage() {
 
   return (
     <>
-      <PageNavbar />
         <main className="relative min-h-screen bg-black">
           
           {/* Hero Section with Background Image */}
@@ -221,7 +219,7 @@ export default function AboutPage() {
               </p>
               <a
                 href="/contact"
-                className="inline-block px-8 md:px-12 py-3 md:py-4 bg-[#6A9F30] text-white text-xs md:text-sm uppercase tracking-widest hover:bg-[#5a8f20] transition-colors duration-300"
+                className="btn btn--primary"
               >
                 Get in Touch
               </a>

@@ -85,7 +85,7 @@ export default function LoadingScreen() {
         {Array.from({ length: 5 }).map((_, i) => (
           <div
             key={i}
-            className="bg-[#0a0a0a] origin-top transition-transform duration-[650ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
+            className="bg-paper origin-top transition-transform duration-[650ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
             style={{
               transform: visible ? "scaleY(1)" : "scaleY(0)",
               transitionDelay: `${(visible ? 0 : i * 55)}ms`,
@@ -103,20 +103,20 @@ export default function LoadingScreen() {
             width={160}
             height={200}
             priority
-            className="object-contain h-20 w-auto sm:h-28 md:h-36 lg:h-[200px]"
+            className="object-contain h-20 w-auto sm:h-28 md:h-36 lg:h-[200px] invert"
           />
         </div>
 
         {/* Progress bar + percentage */}
         <div className="flex flex-1 items-center">
           <div className="w-full px-4 md:px-10 lg:px-14">
-            <div className="relative h-[3px] w-full bg-white/20">
+            <div className="relative h-[3px] w-full bg-hair">
               <div
                 className="absolute left-0 top-0 h-full bg-[#6A9F30] transition-[width] duration-100 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="mt-3 text-lg font-bold text-white/70 sm:text-xl">
+            <p className="tnum mt-3 text-lg text-ink-2 sm:text-xl">
               {progress}%
             </p>
           </div>

@@ -1,84 +1,77 @@
 "use client";
 
-import Image from 'next/image';
-import React, { useState } from 'react';
-import ContactDialog from './ContactDialog';
-import { CurtainLink } from './Curtain';
+import Image from "next/image";
+import React, { useState } from "react";
+import ContactDialog from "./ContactDialog";
+import { CurtainLink } from "./Curtain";
+import { Reveal, RevealLine } from "./motion/Reveal";
 
-const Section3 = () => {
+/**
+ * Energy Audit. Copy unchanged; the skewed clip-path image is replaced with
+ * a plain plate and a caption, because a technical service sells better on
+ * a straight edge than a dynamic one.
+ */
+export default function Section3() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <>
-    <section className="w-screen relative overflow-hidden bg-black py-20 md:py-28">
-      {/* Background Video */}
-      <video
-        className="absolute inset-0 w-full h-full object-cover"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="none"
-        poster="/video/about_poster.jpg"
-      >
-        <source src="/video/about.mp4" type="video/mp4" />
-      </video>
+      <section className="slide-over relative overflow-hidden bg-sheet py-20 md:py-28">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+            <Reveal dir="left" className="order-2 lg:order-1">
+              <figure className="relative">
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper-2">
+                  <Image
+                    src="/images/energy-audit.webp"
+                    alt="Energy Audit"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                    loading="lazy"
+                    quality={80}
+                  />
+                </div>
+                <figcaption className="t-label mt-3 flex items-center justify-between">
+                  <span>Plate 01 — floor audit</span>
+                  <span className="text-brand-deep">30-day interval data</span>
+                </figcaption>
+              </figure>
+            </Reveal>
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/50" />
-      {/* Main content */}
-      <div className="relative z-10 w-full h-full flex flex-col xl:flex-row items-center justify-center xl:justify-between px-6 sm:px-8 md:px-12 lg:px-16 xl:px-12 gap-10 xl:gap-14">
-        {/* Left side - image (only show side-by-side at xl) */}
-        <div className="hidden xl:flex flex-1 max-w-3xl items-center justify-center">
-          <Image
-            src="/images/energy-audit.webp"
-            alt="Energy Audit"
-            className="w-full h-auto max-h-[26rem] object-cover"
-            style={{ clipPath: 'polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%)' }}
-            width={600}
-            height={450}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            loading="lazy"
-            quality={80}
-          />
-        </div>
+            <div className="order-1 lg:order-2">
+              <Reveal dir="none">
+                <p className="t-label tick-row">Service 01</p>
+              </Reveal>
 
-        {/* Right side - content */}
-        <div className="max-w-xl w-full xl:w-auto">
-          <div className="mb-2">
-            <h1 className="text-white text-[clamp(1.75rem,5.5vw,3.75rem)] font-medium tracking-tight uppercase">
-              Energy Audit
-            </h1>
-          </div>
+              <h2 className="t-h2 uppercase">
+                <RevealLine as="span">Energy Audit</RevealLine>
+              </h2>
 
-          <div className="space-y-4 md:space-y-6 max-w-md">
-            <h2 className="text-[clamp(0.9375rem,1.8vw,1.0625rem)] text-[#6A9F30] font-normal border-t-2 border-[#6A9F30] pt-1">
-              Optimize Your Operations
-            </h2>
-            <p className="text-white/80 text-sm md:text-sm lg:text-base leading-relaxed">
-              Our Chief Energy Advisor conducts a comprehensive floor audit to uncover hidden savings — identifying inefficient motors, poor power factors, and energy leaks. We deliver actionable insights that immediately cut your operating costs and establish a data-driven foundation for smarter energy decisions.
-            </p>
-            <div className="flex flex-wrap gap-3 md:gap-4 mt-4">
-              <CurtainLink
-                href="/services/energy-audit"
-                className="btn-slide btn-slide--light inline-block px-5 py-2.5 md:px-6 md:py-3 border border-white/60 text-white text-xs md:text-sm uppercase tracking-widest"
-              >
-                Learn More
-              </CurtainLink>
-              <button
-                onClick={() => setIsDialogOpen(true)}
-                className="btn-slide btn-slide--solid inline-block px-5 py-2.5 md:px-6 md:py-3 bg-[#6A9F30] text-white text-xs md:text-sm uppercase tracking-widest cursor-pointer"
-              >
-                Request Audit
-              </button>
+              <Reveal delay={120}>
+                <p className="mt-6 rule-t pt-5 text-lg text-brand-deep">
+                  Optimize Your Operations
+                </p>
+                <p className="t-body mt-5 max-w-[46ch]">
+                  Our Chief Energy Advisor walks your floor and prices every
+                  leak he finds. Free, and the report is yours either way.
+                </p>
+
+                <div className="mt-8 flex flex-wrap gap-2.5">
+                  <CurtainLink href="/services/energy-audit" className="btn btn--outline">
+                    Learn More
+                  </CurtainLink>
+                  <button onClick={() => setIsDialogOpen(true)} className="btn btn--primary">
+                    Request Audit
+                  </button>
+                </div>
+              </Reveal>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <ContactDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} type="energy-audit" />
+      </section>
+
+      <ContactDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} type="energy-audit" />
     </>
   );
-};
-
-export default Section3;
+}

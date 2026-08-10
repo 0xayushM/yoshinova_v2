@@ -36,13 +36,13 @@ export default function ServiceCTA({ label, heading, description, primaryButton,
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
             <button
               onClick={() => setIsDialogOpen(true)}
-              className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#6A9F30] text-white text-xs md:text-sm uppercase tracking-widest hover:bg-[#5a8f20] transition-colors duration-300 cursor-pointer"
+              className="btn btn--primary"
             >
               {primaryButton.text}
             </button>
             <CurtainLink
               href={secondaryButton.link}
-              className="inline-block px-6 md:px-8 py-3 md:py-4 border-2 border-white text-white text-xs md:text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-300"
+              className="btn btn--onInk"
             >
               {secondaryButton.text}
             </CurtainLink>

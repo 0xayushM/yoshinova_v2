@@ -1,85 +1,55 @@
-'use client';
+"use client";
 
-import { CurtainLink } from './Curtain';
-import SplitText from './SplitText';
+import { CurtainLink } from "./Curtain";
+import { Reveal, RevealLine } from "./motion/Reveal";
 
+/**
+ * The platform statement. Was a dark video wall; now a quiet sheet with the
+ * footage as a watermark and the statement set as the only object on it.
+ * Copy unchanged.
+ */
 export default function AboutSection() {
   return (
-    <section className="w-screen relative bg-black flex items-center justify-center overflow-hidden py-20 md:py-28">
-      {/* Background Video */}
+    <section className="slide-over relative overflow-hidden bg-sheet py-24 md:py-36">
       <div className="absolute inset-0">
         <video
-          className="w-full h-full object-cover"
+          className="video-paper h-full w-full object-cover"
           autoPlay
           loop
           muted
           playsInline
           preload="metadata"
+          poster="/video/about_poster.jpg"
         >
           <source src="/video/about.mp4" type="video/mp4" />
         </video>
-        {/* Scrim: the raw video met the hero with a hard seam and left the
-            copy sitting on near-black with no separation. */}
-        <div className="about-scrim absolute inset-0 bg-gradient-to-b from-black/85 via-black/60 to-black/85" />
       </div>
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-sheet via-sheet/70 to-sheet" />
 
-      {/* Dark overlay for readability */}
-      <div className="absolute inset-0 bg-black/70" />
+      <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
+        <Reveal dir="none">
+          <p className="t-label tick-row">Our platform</p>
+        </Reveal>
 
-      {/* Geometric background pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
-              <path d="M 100 0 L 0 0 0 100" fill="none" stroke="white" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-          <line x1="0" y1="0" x2="100%" y2="100%" stroke="white" strokeWidth="0.5" opacity="0.3"/>
-          <line x1="100%" y1="0" x2="0" y2="100%" stroke="white" strokeWidth="0.5" opacity="0.3"/>
-        </svg>
-      </div>
+        <h2 className="t-h2 max-w-[20ch] font-light">
+          <RevealLine as="span">We measure what your</RevealLine>
+          <RevealLine as="span" delay={90}>power actually costs,</RevealLine>
+          <RevealLine as="span" delay={180}>then build the system</RevealLine>
+          <RevealLine as="span" delay={270}>that lowers it.</RevealLine>
+        </h2>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 md:px-10 lg:px-12">
-        <SplitText
-          text="We take a power-first, innovation-driven approach to developing, commercializing, and operating the critical infrastructure that underpins the breakthrough technologies of today and tomorrow."
-          tag="h2"
-          className="text-white text-[clamp(1.25rem,3.2vw,2.25rem)] font-light leading-[1.15] mb-10 md:mb-14"
-          delay={30}
-          duration={0.8}
-          ease="power3.out"
-          splitType="words"
-          from={{ opacity: 0, y: 30 }}
-          to={{ opacity: 1, y: 0 }}
-          threshold={0.1}
-          rootMargin="0px"
-          textAlign="left"
-        />
-
-        {/* Learn More Section */}
-        <div className="space-y-4">
-          <p className="text-white/60 text-xs md:text-sm uppercase tracking-widest">
-            Learn More
-          </p>
-          
-          <CurtainLink 
-            href="/about" 
-            className="group inline-flex items-center gap-4 pb-2 border-b-2 border-[#6A9F30] hover:border-[#5a8f20] transition-colors duration-300"
+        <Reveal delay={620} className="mt-12">
+          <p className="t-label mb-4">Learn More</p>
+          <CurtainLink
+            href="/about"
+            className="group inline-flex items-center gap-4 border-b-2 border-brand pb-2 transition-colors duration-300 hover:border-ink"
           >
-            <span className="text-white text-base md:text-lg font-normal">
-              Our Platform
-            </span>
-            <svg 
-              className="w-5 h-5 text-[#6A9F30] group-hover:translate-x-2 transition-transform duration-300" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <span className="text-ink text-base md:text-lg">Our Platform</span>
+            <svg className="h-5 w-5 text-brand-deep transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </CurtainLink>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

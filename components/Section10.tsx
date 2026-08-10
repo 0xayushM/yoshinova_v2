@@ -1,52 +1,68 @@
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import ContactDialog from './ContactDialog';
+import React, { useState } from "react";
+import ContactDialog from "./ContactDialog";
+import { Reveal, RevealLine } from "./motion/Reveal";
 
-const Section10 = () => {
+/**
+ * The differentiator. Was a dark photo overlay; now the one ink-filled plate
+ * on the sheet, so it reads as a statement rather than another card. A
+ * marquee of the method runs beneath it. Copy unchanged.
+ */
+const TICKER = [
+  "Energy Audit",
+  "Right-sized MPS",
+  "Permanent cost reduction",
+  "ROI guaranteed, not estimated",
+  "Sized on your real load curve",
+];
+
+export default function Section10() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <>
-    <section className="w-screen relative flex items-center justify-center overflow-hidden py-24 md:py-32">
-      {/* This section used to sit transparent over the 3D scene. With the
-          model gone it needs its own backdrop — a real photograph of the
-          thing we're talking about beats a render of it. */}
-      <Image
-        src="/images/industrial2.webp"
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover"
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-black/70" />
+      <section className="slide-over relative overflow-hidden bg-ink py-24 md:py-32">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
+          <Reveal dir="none">
+            <p className="t-label !text-white/45">Why Yoshinova</p>
+          </Reveal>
 
-      <div className="relative z-10 mx-4 sm:mx-6 md:mx-8 px-6 sm:px-8 md:px-12 lg:px-16 py-10 md:py-12 lg:py-16 max-w-4xl text-center bg-black/40 backdrop-blur-sm border border-white/10">
-        <p className="text-white/50 text-xs uppercase tracking-widest mb-4 md:mb-6">Why Yoshinova</p>
-        <div className="mb-4 md:mb-6">
-          <h2 className="text-white text-[clamp(1.75rem,5.5vw,3.75rem)] font-medium uppercase tracking-tight leading-[1]">
-            We audit first.
+          <h2 className="t-display mt-6 uppercase">
+            <RevealLine as="span" className="!text-paper font-light">We audit first.</RevealLine>
+            <RevealLine as="span" delay={110} className="!text-brand">Then we deploy.</RevealLine>
           </h2>
-          <h2 className="text-[#8BC34A] text-[clamp(1.75rem,5.5vw,3.75rem)] font-medium uppercase tracking-tight leading-[1]">
-            Then we deploy.
-          </h2>
+
+          <Reveal delay={180}>
+            <p className="mt-8 max-w-[46ch] text-[clamp(1rem,1.6vw,1.25rem)] leading-relaxed text-white/70">
+              Sized on your data, not industry averages. That&apos;s how we
+              guarantee ROI instead of promising it.
+            </p>
+            <button onClick={() => setIsDialogOpen(true)} className="btn btn--onInk mt-9">
+              Start With a Free Audit
+            </button>
+          </Reveal>
         </div>
-        <p className="text-white/80 text-[clamp(0.875rem,1.8vw,1.0625rem)] font-light max-w-2xl mx-auto leading-[1.3] tracking-tight mb-6 md:mb-8">
-          Every MPS we deploy is sized on real data from your facility not industry averages or guesswork. That&apos;s how we guarantee ROI, not just promise it.
-        </p>
-        <button
-          onClick={() => setIsDialogOpen(true)}
-          className="btn-slide btn-slide--ghost inline-block px-5 py-2.5 md:px-6 md:py-3 border border-white/60 text-white text-xs md:text-sm uppercase tracking-widest"
-        >
-          Start With a Free Audit
-        </button>
-      </div>
-    </section>
-    <ContactDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} type="energy-audit" />
+
+        {/* method marquee */}
+        {/* Two identical tracks side by side, each sliding a full width —
+            the second is already in place when the first leaves, so the
+            loop never shows a gap. */}
+        <div className="marquee mt-20 border-y border-white/12 py-5" aria-hidden>
+          {[0, 1].map((dup) => (
+            <div className="marquee-track" key={dup}>
+              {TICKER.map((t) => (
+                <span key={`${dup}-${t}`} className="flex items-center gap-3 whitespace-nowrap text-[clamp(1rem,2.2vw,1.6rem)] text-white/35">
+                  <span className="inline-block h-1.5 w-1.5 shrink-0 bg-brand" />
+                  {t}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <ContactDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} type="energy-audit" />
     </>
   );
-};
-
-export default Section10;
+}

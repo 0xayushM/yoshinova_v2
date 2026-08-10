@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { X } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { track } from '@/lib/analytics';
 
 interface ContactDialogProps {
   isOpen: boolean;
@@ -11,6 +13,7 @@ interface ContactDialogProps {
 }
 
 export default function ContactDialog({ isOpen, onClose, type = 'contact' }: ContactDialogProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -41,10 +44,12 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
       if (result.success) {
         setSubmitStatus('success');
         setFormData({ name: '', company: '', contact: '' });
-        setTimeout(() => {
-          onClose();
-          setSubmitStatus('idle');
-        }, 2000);
+        track(type === 'energy-audit' ? 'audit_request' : 'contact_submit', {
+          form: type,
+        });
+        // A real route so the conversion has a URL to fire against.
+        onClose();
+        router.push('/thank-you');
       } else {
         setSubmitStatus('error');
       }
@@ -69,16 +74,16 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
     <div className="fixed inset-0 z-[10000] flex items-center justify-center">
       {/* Backdrop */}
       <div 
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+        className="absolute inset-0 bg-ink/55 backdrop-blur-sm"
         onClick={onClose}
       />
       
       {/* Dialog */}
-      <div className="relative z-10 w-full max-w-md md:max-w-3xl mx-4 bg-gradient-to-t from-[#0a0a0a] to-[#0a0a0a]/95 border border-white/20 overflow-hidden">
+      <div className="relative z-10 w-full max-w-md md:max-w-3xl mx-4 bg-paper border border-hair overflow-hidden">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-20 text-white/60 hover:text-white transition-colors"
+          className="absolute top-4 right-4 z-20 text-ink-3 hover:text-ink transition-colors"
           aria-label="Close dialog"
         >
           <X size={24} />
@@ -92,7 +97,7 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
                 <h3 className="text-white text-[clamp(1.25rem,2.6vw,1.625rem)] font-bold tracking-wide mb-2">
                   {type === 'energy-audit' ? 'Request Energy Audit' : 'Contact Us'}
                 </h3>
-                <p className="text-white/70 text-sm leading-relaxed">
+                <p className="t-body mt-2 text-sm">
                   {type === 'energy-audit' 
                     ? 'We find your hidden savings first. Then we talk MPS.'
                     : 'Get in touch with our team for more information.'}
@@ -106,7 +111,7 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/30 text-white text-base placeholder-white/50 focus:outline-none focus:border-white focus:bg-white/15 transition-all"
+                  className="field-paper"
                   placeholder="Your Name *"
                 />
                 <input
@@ -115,7 +120,7 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
                   value={formData.company}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/30 text-white text-base placeholder-white/50 focus:outline-none focus:border-white focus:bg-white/15 transition-all"
+                  className="field-paper"
                   placeholder="Company Name *"
                 />
                 <input
@@ -124,13 +129,13 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
                   value={formData.contact}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-white/10 border border-white/30 text-white text-base placeholder-white/50 focus:outline-none focus:border-white focus:bg-white/15 transition-all"
+                  className="field-paper"
                   placeholder="Contact Number *"
                 />
               </div>
 
               {submitStatus === 'success' && (
-                <p className="text-[#8BC34A] text-sm">Form submitted successfully!</p>
+                <p className="text-brand-deep text-sm">Form submitted successfully!</p>
               )}
               {submitStatus === 'error' && (
                 <p className="text-red-400 text-sm">Failed to submit. Please try again.</p>
@@ -139,10 +144,14 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-block px-6 py-3 border border-white/60 text-white text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-colors duration-300"
+                className="btn btn--primary"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit Request'}
               </button>
+
+              <p className="t-label !tracking-[0.1em] normal-case">
+                We reply within one working day. No email required.
+              </p>
             </form>
           </div>
 
@@ -156,7 +165,7 @@ export default function ContactDialog({ isOpen, onClose, type = 'contact' }: Con
               sizes="50vw"
               className="object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] to-transparent opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-r from-paper to-transparent opacity-70" />
           </div>
         </div>
       </div>

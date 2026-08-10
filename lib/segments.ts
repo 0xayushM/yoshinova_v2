@@ -73,22 +73,22 @@ export const DELIVERABLES = [
   {
     n: "01",
     t: "30-day load profile",
-    d: "Interval data from your own meter, plotted against your DISCOM's ToD windows. You see exactly which hours are costing you.",
+    d: "Which hours actually cost you, from your own meter.",
   },
   {
     n: "02",
     t: "Itemised leak register",
-    d: "Every finding priced in rupees per month — power factor, idle load, motor inefficiency, DG runtime — with the instrument reading behind each one.",
+    d: "Every finding priced per month, with the reading behind it.",
   },
   {
     n: "03",
     t: "Right-sized MPS proposal",
-    d: "Capacity sized to your measured curve, not your sanctioned load. With the payback arithmetic shown, not summarised.",
+    d: "Sized to your measured curve, with the payback arithmetic shown.",
   },
   {
     n: "04",
     t: "Yours either way",
-    d: "The report is yours whether or not you buy anything from us. Several findings cost nothing to fix and we will tell you which.",
+    d: "Yours even if you buy nothing. Some fixes cost you nothing at all.",
   },
 ];
 

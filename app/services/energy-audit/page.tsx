@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import PageNavbar from '@/components/PageNavbar';
 import ContactDialog from '@/components/ContactDialog';
 import ServiceHero from '@/components/service/ServiceHero';
 import ServiceFooter from '@/components/service/ServiceFooter';
@@ -12,6 +11,7 @@ import MarketInsight from '@/components/service/sections/MarketInsight';
 import UseCaseGrid from '@/components/service/sections/UseCaseGrid';
 import HowItWorks from '@/components/service/sections/HowItWorks';
 import LiveMetricGraph from '@/components/service/sections/LiveMetricGraph';
+import Breadcrumbs from '@/components/Breadcrumbs';
 
 const auditUseCases = [
   {
@@ -96,7 +96,16 @@ export default function EnergyAuditPage() {
 
   return (
     <>
-      <PageNavbar />
+      <div className="absolute inset-x-0 top-0 z-30 mx-auto max-w-[1600px] px-5 pt-24 sm:px-8 md:px-10 lg:px-14">
+        <Breadcrumbs
+          tone="paper"
+          crumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Services', href: '/services' },
+            { label: 'Energy Audit' },
+          ]}
+        />
+      </div>
       <main className="relative min-h-screen bg-[#0a0a0a]">
 
         <ServiceHero
@@ -272,7 +281,7 @@ export default function EnergyAuditPage() {
           </p>
           <button
             onClick={() => setIsAuditDialogOpen(true)}
-            className="inline-block px-8 py-4 bg-[#6A9F30] text-white text-sm uppercase tracking-widest hover:bg-[#5a8f20] transition-colors duration-300 cursor-pointer"
+            className="btn btn--primary"
           >
             Book Your Audit
           </button>

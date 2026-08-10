@@ -5,7 +5,9 @@ import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CurtainTransitionProvider } from "./Curtain";
+import Analytics from "./Analytics";
 import LoadingScreen from "./LoadingScreen";
+import StickyCTA from "./StickyCTA";
 import Navbar from "./Navbar";
 import SmoothScrollProvider from "./SmoothScrollProvider";
 import VisitorTracker from "./VisitorTracker";
@@ -16,7 +18,6 @@ if (typeof window !== "undefined") {
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const isHome = pathname === "/";
 
   // Re-measure triggers after a route change so animations don't stay stuck
   // in their initial state after client-side navigation.
@@ -28,17 +29,22 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 
   return (
     <>
+      <Analytics />
       <LoadingScreen />
       <VisitorTracker />
-      {/* Navbar must live INSIDE the provider — it calls useCurtainRouter(),
-          and when it was mounted outside, every nav link resolved to the
-          context default and silently did nothing. */}
+      {/* The navbar is rendered here, once, for every route — it used to be
+          dropped into each page individually, so anything added later
+          (privacy, thank-you, 404) silently shipped without one.
+          It must stay INSIDE the provider: it calls useCurtainRouter(), and
+          mounted outside, every nav link resolved to the context default and
+          did nothing. */}
       <SmoothScrollProvider>
         <CurtainTransitionProvider>
-          {isHome && <Navbar />}
+          <Navbar />
           {children}
         </CurtainTransitionProvider>
       </SmoothScrollProvider>
+      <StickyCTA />
     </>
   );
 }

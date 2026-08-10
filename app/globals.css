@@ -1,439 +1,250 @@
 @import "tailwindcss";
 
-:root{
-  --color-tertiary: #6A9F30;
-  --color-tertiary2: #E87722;
+/* ══════════════════════════════════════════════════════════════════════
+   YOSHINOVA — design system
+   "Instrumentation on paper."
+
+   MPS is modular, measured hardware. So the theme is a technical drawing:
+   a warm greyish-white sheet, hairline rules, a visible module grid,
+   tabular figures, and colour used only where it carries meaning —
+   green is what you keep, rust is what you're paying.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* — paper: the whole site sits on this, no dark sections — */
+  --color-paper:      #F5F5F2;   /* base sheet */
+  --color-paper-2:    #EDEDE8;   /* recessed panels */
+  --color-paper-3:    #E3E3DC;   /* borders of filled blocks */
+  --color-sheet:      #FBFBF9;   /* raised cards */
+
+  /* — ink — */
+  --color-ink:        #14160F;   /* headings, 16.9:1 on paper */
+  --color-ink-2:      #4A4E43;   /* body, 7.4:1 */
+  --color-ink-3:      #7C8175;   /* captions, 3.6:1 — large text only */
+  --color-hair:       rgba(20, 22, 15, 0.14);
+  --color-hair-2:     rgba(20, 22, 15, 0.07);
+
+  /* — signal — */
+  --color-brand:      #6A9F30;   /* brand fill, large shapes only */
+  --color-brand-deep: #4A7519;   /* 5.4:1 on paper — safe for text */
+  --color-brand-ink:  #2F4A10;   /* headings on green fills */
+  --color-rust:       #B23A18;   /* cost, diesel, waste — 5.6:1 */
+  --color-amber:      #A65B06;   /* audit findings — 5.0:1 */
+
+  --font-display: 'Armstrong', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* motion — one curve for everything so the site feels like one object */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
 }
 
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeueLTW0545Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
+/* ── fonts (unchanged from the live site) ───────────────────────────── */
+@font-face { font-family:'Helvetica Neue'; src:url('/fonts/HelveticaNeueLTW0545Light.woff2') format('woff2'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Helvetica Neue'; src:url('/fonts/HelveticaNeueLTW0555Roman.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Helvetica Neue'; src:url('/fonts/HelveticaLTStd-Bold.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Armstrong'; src:url('/fonts/Armstrong.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Armstrong'; src:url('/fonts/Armstrong-Oblique.woff2') format('woff2'); font-weight:400; font-style:oblique; font-display:swap; }
+@font-face { font-family:'Armstrong'; src:url('/fonts/Armstrong-Extrabold.woff2') format('woff2'); font-weight:800; font-style:normal; font-display:swap; }
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; padding: 0; overflow-x: hidden;
+    /* clears the fixed mobile contact bar so it can never sit over the footer */
+    padding-bottom: calc(var(--mobile-bar-h, 5rem) + env(safe-area-inset-bottom));
+    background: var(--color-paper);
+    color: var(--color-ink-2);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (min-width: 768px) {
+    body { padding-bottom: 0; }
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    letter-spacing: -0.03em;
+  }
+  :focus-visible { outline: 2px solid var(--color-brand-deep); outline-offset: 3px; }
+  ::selection { background: var(--color-brand); color: #fff; }
+
+  ::-webkit-scrollbar { width: 10px; background: var(--color-paper-2); }
+  ::-webkit-scrollbar-thumb { background: rgba(20,22,15,.28); }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(20,22,15,.45); }
+  html { scrollbar-width: thin; scrollbar-color: rgba(20,22,15,.28) var(--color-paper-2); }
 }
 
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaNeueLTW0555Roman.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+@layer utilities {
+  /* ── type roles ─────────────────────────────────────────────────── */
+  .t-display { font-family: var(--font-display); font-size: clamp(2rem, 6.2vw, 5rem); line-height: 0.94; letter-spacing: -0.04em; }
+  .t-h2      { font-family: var(--font-display); font-size: clamp(1.6rem, 4.4vw, 3rem);  line-height: 1.0;  letter-spacing: -0.035em; }
+  .t-h3      { font-family: var(--font-display); font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1.15; letter-spacing: -0.02em; }
+  .t-lede    { font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.55; color: var(--color-ink-2); }
+  .t-body    { font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.65; color: var(--color-ink-2); }
+  .t-label   { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-ink-3); }
+  .tnum      { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
 
-@font-face {
-  font-family: 'Helvetica Neue';
-  src: url('/fonts/HelveticaLTStd-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+  /* ── the module grid: MPS is modular, so the sheet shows its cells ── */
+  .sheet-grid {
+    background-image:
+      linear-gradient(to right, var(--color-hair-2) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-hair-2) 1px, transparent 1px);
+    background-size: 88px 88px;
+  }
+  .rule-t { border-top: 1px solid var(--color-hair); }
+  .rule-b { border-bottom: 1px solid var(--color-hair); }
 
-@font-face {
-  font-family: 'Armstrong';
-  src: url('/fonts/Armstrong.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
+  /* index marks in the margin, like a drawing sheet */
+  .tick-row::before {
+    content: "";
+    display: block; height: 8px; margin-bottom: 14px;
+    background-image: linear-gradient(to right, var(--color-hair) 1px, transparent 1px);
+    background-size: 22px 8px;
+  }
 
-@font-face {
-  font-family: 'Armstrong';
-  src: url('/fonts/Armstrong-Oblique.woff2') format('woff2');
-  font-weight: 400;
-  font-style: oblique;
-  font-display: swap;
-}
+  /* ── light-treated video: same footage, desaturated onto the sheet ── */
+  .video-paper {
+    filter: grayscale(1) contrast(0.82) brightness(1.28);
+    mix-blend-mode: multiply;
+    opacity: 0.42;
+  }
 
-@font-face {
-  font-family: 'Armstrong';
-  src: url('/fonts/Armstrong-Extrabold.woff2') format('woff2');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
+  /* ── scroll reveal (driven by IntersectionObserver in Reveal.tsx) ── */
+  .rv { opacity: 0; will-change: transform, opacity; }
+  .rv-up    { transform: translateY(28px); }
+  .rv-left  { transform: translateX(-32px); }
+  .rv-right { transform: translateX(32px); }
+  .rv-scale { transform: scale(0.96); }
+  .rv.is-in {
+    opacity: 1; transform: none;
+    transition: opacity .7s var(--ease-out-quint), transform .9s var(--ease-out-quint);
+    transition-delay: var(--rv-delay, 0ms);
+  }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
-}
+  /* masked line reveal — the line slides out from behind its own edge */
+  .rv-mask { display: block; overflow: hidden; }
+  .rv-mask > * { display: block; transform: translateY(105%); }
+  .rv-mask.is-in > * {
+    transform: translateY(0);
+    transition: transform .95s var(--ease-out-quint);
+    transition-delay: var(--rv-delay, 0ms);
+  }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Armstrong', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
+  /* ── slide-over: sections that ride over the one before them ─────── */
+  .slide-over {
+    position: relative;
+    border-radius: 28px 28px 0 0;
+    box-shadow: 0 -28px 60px -30px rgba(20, 22, 15, 0.28);
+  }
 
-/* Custom styled scrollbar for Chrome, Safari and Opera */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar,
-.scroll::-webkit-scrollbar {
-  width: 12px;
-  background: rgba(0, 0, 0, 0.2);
-}
+  /* ── marquee ────────────────────────────────────────────────────── */
+  .marquee { display: flex; overflow: hidden; }
+  .marquee-track {
+    flex: 0 0 auto; display: flex; align-items: center; gap: 3rem;
+    padding-right: 3rem; min-width: max-content;
+    animation: marquee 38s linear infinite;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-100%); } }
 
-html::-webkit-scrollbar-track,
-body::-webkit-scrollbar-track,
-.scroll::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
+  /* hero motif: the load curve draws itself in once, on load */
+  @keyframes hero-draw { to { stroke-dashoffset: 0; } }
 
-html::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar-thumb,
-.scroll::-webkit-scrollbar-thumb {
-  background: rgba(106, 159, 48, 0.6);
-  border-radius: 6px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-}
+  /* ── form controls on paper ─────────────────────────────────────── */
+  .field-paper {
+    width: 100%; padding: 0.85rem 0.95rem;
+    background: var(--color-sheet);
+    border: 1px solid var(--color-hair);
+    color: var(--color-ink);
+    font-size: 16px; font-family: inherit; appearance: none;
+  }
+  .field-paper::placeholder { color: var(--color-ink-3); }
+  .field-paper:focus { outline: none; border-color: var(--color-brand-deep); }
 
-html::-webkit-scrollbar-thumb:hover,
-body::-webkit-scrollbar-thumb:hover,
-.scroll::-webkit-scrollbar-thumb:hover {
-  background: rgba(106, 159, 48, 0.8);
-}
-
-/* Custom scrollbar for Firefox */
-html,
-body,
-.scroll {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(106, 159, 48, 0.6) rgba(0, 0, 0, 0.1);
-}
-
-/* ── BESS Card — liquid glass effect ── */
-@keyframes bess-border-rotate {
-  0%   { --bess-angle: 0deg; }
-  100% { --bess-angle: 360deg; }
-}
-
-@keyframes bess-shimmer {
-  0%   { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-@keyframes bess-glow-pulse {
-  0%, 100% { opacity: 0.4; }
-  50%      { opacity: 0.7; }
-}
-
-@property --bess-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.bess-card-outer {
-  position: relative;
-  border-radius: 16px;
-  padding: 1.5px;
-  background: conic-gradient(
-    from var(--bess-angle),
-    rgba(255,255,255,0.06) 0%,
-    rgba(var(--zone-rgb, 120,200,255), 0.25) 25%,
-    rgba(var(--zone-rgb, 120,200,255), 0.12) 50%,
-    rgba(255,255,255,0.04) 75%,
-    rgba(255,255,255,0.06) 100%
-  );
-  animation: bess-border-rotate 6s linear infinite;
-}
-
-.bess-card-outer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  background: conic-gradient(
-    from var(--bess-angle),
-    transparent 0%,
-    rgba(var(--zone-rgb, 120,200,255), 0.12) 25%,
-    rgba(var(--zone-rgb, 120,200,255), 0.06) 50%,
-    transparent 75%
-  );
-  filter: blur(20px);
-  animation: bess-glow-pulse 3s ease-in-out infinite, bess-border-rotate 6s linear infinite;
-  z-index: -1;
-}
-
-.bess-card-inner {
-  position: relative;
-  border-radius: 14.5px;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(15, 15, 20, 0.88) 0%,
-      rgba(25, 28, 40, 0.92) 40%,
-      rgba(18, 20, 30, 0.90) 100%
-    );
-  backdrop-filter: blur(24px) saturate(1.6);
-  -webkit-backdrop-filter: blur(24px) saturate(1.6);
-  overflow: hidden;
-}
-
-.bess-card-inner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.06) 0%,
-    transparent 50%,
-    rgba(255,255,255,0.02) 100%
-  );
-  pointer-events: none;
-}
-
-.bess-card-inner::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    ellipse at 30% 20%,
-    rgba(var(--zone-rgb, 120,200,255), 0.06) 0%,
-    transparent 50%
-  ),
-  radial-gradient(
-    ellipse at 70% 80%,
-    rgba(var(--zone-rgb, 120,200,255), 0.03) 0%,
-    transparent 50%
-  );
-  pointer-events: none;
-  transition: opacity 0.5s ease;
-  opacity: 0;
-}
-
-.bess-card-outer:hover .bess-card-inner::after {
-  opacity: 1;
-}
-
-.bess-stat-block {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
-}
-
-.bess-stat-block:hover {
-  background: rgba(var(--zone-rgb, 120,200,255), 0.06);
-  border-color: rgba(var(--zone-rgb, 120,200,255), 0.15);
-  box-shadow: 0 0 16px rgba(var(--zone-rgb, 120,200,255), 0.1),
-              inset 0 0 12px rgba(var(--zone-rgb, 120,200,255), 0.04);
-}
-
-.bess-shimmer-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255,255,255,0.3) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: bess-shimmer 4s ease-in-out infinite;
-}
-/* ══════════════════════════════════════════════════════════════════
-   CURTAIN — intro reveal + route transitions
-   Replaces the old LoadingScreen, which held the whole page behind a
-   progress bar until a 38 MB GLB finished downloading. Nothing is
-   gated on an asset any more; the curtain is purely a brand moment
-   and is capped at ~1.1s.
-   ══════════════════════════════════════════════════════════════════ */
-
-.curtain-root {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  display: grid;
-  grid-template-columns: repeat(var(--curtain-panels, 5), 1fr);
-  pointer-events: none;
-}
-
-.curtain-panel {
-  background: #0a0a0a;
-  transform-origin: top;
-  will-change: transform;
-}
-
-/* the brand mark that sits over the panels while they're closed */
-.curtain-mark {
-  position: fixed;
-  inset: 0;
-  z-index: 100000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.curtain-sweep {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(106, 159, 48, 0.5) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   AUDIT WALKTHROUGH
-   ══════════════════════════════════════════════════════════════════ */
-
-.audit-tab {
-  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
-}
-
-.tnum {
-  font-variant-numeric: tabular-nums;
-  font-feature-settings: "tnum" 1;
-}
-
-.audit-range {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.18);
-  outline: none;
-}
-.audit-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #8bc34a;
-  border: 4px solid #0a0a0a;
-  box-shadow: 0 0 0 1px #8bc34a;
-  cursor: grab;
-}
-.audit-range::-moz-range-thumb {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #8bc34a;
-  border: 4px solid #0a0a0a;
-  box-shadow: 0 0 0 1px #8bc34a;
-  cursor: grab;
-}
-
-.audit-field {
-  width: 100%;
-  padding: 0.8rem 0.9rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
-  font-size: 16px; /* stops iOS Safari zooming the page on focus */
-  font-family: inherit;
-  appearance: none;
-}
-.audit-field::placeholder { color: rgba(255, 255, 255, 0.4); }
-.audit-field:focus {
-  outline: none;
-  border-color: rgba(139, 195, 74, 0.7);
-  background: rgba(255, 255, 255, 0.09);
-}
-
-/* The previous site overrode Tailwind's focus styles without replacing
-   them, so keyboard users had no visible focus anywhere. */
-:focus-visible {
-  outline: 2px solid #8bc34a;
-  outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .curtain-panel,
-  .curtain-sweep { transition: none !important; animation: none !important; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  .range-paper { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: var(--color-hair); outline: none; }
+  .range-paper::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--color-brand); border: 4px solid var(--color-paper);
+    box-shadow: 0 0 0 1px var(--color-brand); cursor: grab;
+  }
+  .range-paper::-moz-range-thumb {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--color-brand); border: 4px solid var(--color-paper);
+    box-shadow: 0 0 0 1px var(--color-brand); cursor: grab;
   }
 }
 
-/* ══════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════════
    BUTTONS — curved sliding fill
-   The fill enters from the bottom as an ellipse-topped shape, flattens
-   as it covers, and leaves through the top. border-radius is animated
-   alongside translateY, which is what gives the sweep its curve.
-   ══════════════════════════════════════════════════════════════════ */
+   The fill enters from below with an ellipse-topped edge and flattens as
+   it covers. Animating border-radius alongside translateY is what makes
+   the sweep read as curved rather than a flat wipe.
+   ══════════════════════════════════════════════════════════════════════ */
 
-.btn-slide {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  transition: color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+.btn {
+  position: relative; isolation: isolate; overflow: hidden;
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 0.95rem 1.6rem;
+  font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  border: 2px solid transparent; cursor: pointer;
+  /* Only the label transitions, and it waits until the fill is most of the
+     way across. The border is deliberately NOT animated — it used to change
+     colour in .45s while the fill took .55s to arrive, so the outline lit up
+     first and the whole sweep read as laggy. The fill covers the border
+     anyway (inset: -2px), so there is nothing left to recolour. */
+  transition: color .28s var(--ease-out-quint) .1s;
 }
+/* The fill rises from the bottom on a curved top edge and flattens as it
+   covers. Animating border-radius alongside translateY is what makes the
+   sweep read as curved rather than a flat wipe.
 
-.btn-slide::before {
-  content: "";
-  position: absolute;
-  left: -10%;
-  bottom: 0;
-  width: 120%;
-  height: 100%;
-  z-index: -1;
-  background: var(--btn-slide-fill, #6A9F30);
-  transform: translateY(100%);
-  border-radius: 50% 50% 0 0 / 28% 28% 0 0;
-  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1),
-              border-radius 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+   `inset: -2px` plus a 104% offset (not 100%) is deliberate: the resting
+   fill sits fully outside the border box. At exactly 100% the curve's apex
+   landed on the bottom boundary and subpixel rounding left a visible arc
+   under the button. */
+.btn::before {
+  content: ""; position: absolute; inset: -2px;
+  z-index: -1; background: var(--btn-fill);
+  transform: translateY(104%);
+  border-radius: 45% 45% 0 0 / 100% 100% 0 0;
+  transition: transform .5s var(--ease-out-quint), border-radius .5s var(--ease-out-quint);
 }
+.btn:hover::before, .btn:focus-visible::before { transform: translateY(0); border-radius: 0; }
+.btn:hover, .btn:focus-visible { color: var(--btn-text); }
 
-.btn-slide:hover::before,
-.btn-slide:focus-visible::before {
-  transform: translateY(0);
-  border-radius: 0;
+.btn--primary { background: var(--color-brand); color: #fff; --btn-fill: var(--color-ink); --btn-text: #fff; }
+.btn--outline { background: transparent; color: var(--color-ink); border-color: var(--color-hair); --btn-fill: var(--color-ink); --btn-text: var(--color-paper); }
+.btn--ghost   { background: transparent; color: var(--color-brand-deep); border-color: color-mix(in srgb, var(--color-brand) 45%, transparent); --btn-fill: var(--color-brand); --btn-text: #fff; }
+.btn--onGreen { background: transparent; color: #fff; border-color: rgba(255,255,255,.6); --btn-fill: #fff; --btn-text: var(--color-brand-ink); }
+.btn--onInk   { background: transparent; color: var(--color-paper); border-color: rgba(255,255,255,.35); --btn-fill: var(--color-paper); --btn-text: var(--color-ink); }
+/* solid — for CTAs sitting over photography, where an outline disappears */
+.btn--solid   { background: var(--color-sheet); color: var(--color-ink); border-color: var(--color-hair); --btn-fill: var(--color-ink); --btn-text: var(--color-paper); }
+
+/* ══════════════════════════════════════════════════════════════════════
+   CURTAIN — intro reveal + route transitions
+   ══════════════════════════════════════════════════════════════════════ */
+
+.curtain-root {
+  position: fixed; inset: 0; z-index: 99999;
+  display: grid; grid-template-columns: repeat(var(--curtain-panels, 5), 1fr);
+  pointer-events: none;
 }
-
-/* leaves through the top rather than snapping back */
-.btn-slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background: var(--btn-slide-base, transparent);
-}
-
-.btn-slide:hover,
-.btn-slide:focus-visible {
-  color: var(--btn-slide-text, #ffffff);
-  border-color: var(--btn-slide-fill, #6A9F30);
-}
-
-/* variants ------------------------------------------------------- */
-
-/* outlined on dark → fills brand green, text stays white */
-.btn-slide--ghost {
-  --btn-slide-fill: #6A9F30;
-  --btn-slide-text: #ffffff;
-}
-
-/* outlined on dark → fills white, text flips to black */
-.btn-slide--light {
-  --btn-slide-fill: #ffffff;
-  --btn-slide-text: #0a0a0a;
-}
-
-/* solid green → darkens on hover */
-.btn-slide--solid {
-  --btn-slide-fill: #4d7a1f;
-  --btn-slide-text: #ffffff;
-}
-
-/* outlined on light backgrounds */
-.btn-slide--dark {
-  --btn-slide-fill: #0a0a0a;
-  --btn-slide-text: #ffffff;
+.curtain-panel { background: var(--color-ink); transform-origin: top; will-change: transform; }
+.curtain-mark { position: fixed; inset: 0; z-index: 100000; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+.curtain-sweep {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(106,159,48,.55) 50%, transparent 100%);
+  transform: translateX(-100%);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn-slide::before { transition: none; }
+  html { scroll-behavior: auto; }
+  .rv, .rv-mask > * { opacity: 1 !important; transform: none !important; }
+  .marquee > * { animation: none; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }

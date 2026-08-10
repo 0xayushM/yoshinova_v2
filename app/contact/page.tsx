@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import PageNavbar from '@/components/PageNavbar';
+import LocationMap from '@/components/LocationMap';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -57,7 +57,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <PageNavbar />
         <main className="relative min-h-screen">
         {/* Background Image */}
         <div className="fixed inset-0 z-0">
@@ -196,7 +195,10 @@ export default function ContactPage() {
 
           </div>
         </div>
-      </main>
+        {/* <div className="relative z-10 mx-auto max-w-[1600px] px-6 pb-20 sm:px-8 md:px-10 lg:px-20">
+            <LocationMap />
+          </div> */}
+        </main>
     </>
   );
 }

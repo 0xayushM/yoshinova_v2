@@ -16,9 +16,9 @@ const lerp = (a: number, b: number, u: number) => a + (b - a) * u;
 /* Brand palette, unchanged from the live site.
    Green is Yoshinova. Red is what the grid and the genset cost you.
    Amber is what the audit found. */
-const GREEN = "#8BC34A";
-const RED = "#EF4444";
-const AMBER = "#F59E0B";
+const GREEN = "#4A7519";
+const RED = "#B23A18";
+const AMBER = "#A65B06";
 
 interface Props {
   /** 0 = today's curve, 1 = with MPS */
@@ -111,7 +111,7 @@ export default function LoadCurve({
       cx.clearRect(0, 0, W, H);
 
       /* grid + axis labels */
-      cx.strokeStyle = "rgba(255,255,255,.07)";
+      cx.strokeStyle = "rgba(20,22,15,.10)";
       cx.lineWidth = 1;
       for (let i = 0; i <= 4; i++) {
         const y = PAD.t + (H - PAD.t - PAD.b) * (i / 4);
@@ -120,7 +120,7 @@ export default function LoadCurve({
         cx.lineTo(W - PAD.r, y);
         cx.stroke();
       }
-      cx.fillStyle = "rgba(255,255,255,.35)";
+      cx.fillStyle = "rgba(20,22,15,.42)";
       cx.font = font(10);
       cx.textAlign = "right";
       for (let i = 0; i <= 4; i++) {
@@ -138,7 +138,7 @@ export default function LoadCurve({
 
       /* charge / discharge windows (step 3) */
       if (p > 0.02) {
-        cx.fillStyle = `rgba(139,195,74,${0.09 * p})`;
+        cx.fillStyle = `rgba(106,159,48,${0.13 * p})`;
         cx.fillRect(X(10), PAD.t, X(15) - X(10), H - PAD.t - PAD.b);
 
         let start = -1;
@@ -146,12 +146,12 @@ export default function LoadCurve({
           const gap = LOAD_CURVE[h] - mps[h];
           if (gap > 0.01 && start < 0) start = h;
           if ((gap <= 0.01 || h === 23) && start >= 0) {
-            cx.fillStyle = `rgba(239,68,68,${0.09 * p})`;
+            cx.fillStyle = `rgba(178,58,24,${0.10 * p})`;
             cx.fillRect(X(start), PAD.t, X(h) - X(start), H - PAD.t - PAD.b);
             start = -1;
           }
         }
-        cx.fillStyle = `rgba(139,195,74,${0.65 * p})`;
+        cx.fillStyle = `rgba(74,117,25,${0.9 * p})`;
         cx.font = font(9.5);
         cx.fillText("CHARGE", (X(10) + X(15)) / 2, PAD.t + 12);
       }
@@ -161,17 +161,17 @@ export default function LoadCurve({
       if (dA > 0.02) {
         const bw = X(1) - X(0);
         DIESEL_HOURS.forEach((h) => {
-          cx.fillStyle = `rgba(239,68,68,${0.18 * dA})`;
+          cx.fillStyle = `rgba(178,58,24,${0.13 * dA})`;
           cx.fillRect(X(h) - bw / 2, PAD.t, bw, H - PAD.t - PAD.b);
         });
-        cx.fillStyle = `rgba(239,68,68,${0.8 * dA})`;
+        cx.fillStyle = `rgba(178,58,24,${0.95 * dA})`;
         cx.font = font(9.5);
         cx.fillText("DG", X(DIESEL_HOURS[0]), PAD.t + 12);
       }
 
       /* today's curve stays visible as the reference */
       trace(0);
-      cx.strokeStyle = `rgba(239,68,68,${lerp(1, 0.45, p)})`;
+      cx.strokeStyle = `rgba(178,58,24,${lerp(1, 0.4, p)})`;
       cx.lineWidth = 2;
       cx.setLineDash(p > 0.5 ? [4, 4] : []);
       cx.stroke();
@@ -183,16 +183,16 @@ export default function LoadCurve({
       cx.lineTo(X(0), Y(0));
       cx.closePath();
       const g = cx.createLinearGradient(0, PAD.t, 0, H - PAD.b);
-      g.addColorStop(0, `rgba(139,195,74,${lerp(0.03, 0.22, p)})`);
-      g.addColorStop(1, "rgba(139,195,74,0)");
+      g.addColorStop(0, `rgba(106,159,48,${lerp(0.05, 0.26, p)})`);
+      g.addColorStop(1, "rgba(106,159,48,0)");
       cx.fillStyle = g;
       cx.fill();
 
       trace(p);
-      cx.strokeStyle = p > 0.15 ? GREEN : "rgba(139,195,74,.4)";
+      cx.strokeStyle = p > 0.15 ? GREEN : "rgba(74,117,25,.45)";
       cx.lineWidth = 2.5;
       cx.lineJoin = "round";
-      cx.shadowColor = "rgba(139,195,74,.5)";
+      cx.shadowColor = "rgba(106,159,48,.35)";
       cx.shadowBlur = p * 14;
       cx.stroke();
       cx.shadowBlur = 0;
@@ -204,7 +204,7 @@ export default function LoadCurve({
           const x = X(f.hour);
           const y = Y(LOAD_CURVE[f.hour]);
           const dir = y > H / 2 ? -1 : 1;
-          cx.strokeStyle = "rgba(245,158,11,.8)";
+          cx.strokeStyle = "rgba(166,91,6,.75)";
           cx.lineWidth = 1;
           cx.setLineDash([3, 3]);
           cx.beginPath();
@@ -224,9 +224,9 @@ export default function LoadCurve({
             Math.min(W - PAD.r - tw - 14, x - tw / 2 - 7),
           );
           const by = y + dir * 26 + (dir > 0 ? 0 : -18);
-          cx.fillStyle = "rgba(10,10,10,.94)";
+          cx.fillStyle = "rgba(251,251,249,.97)";
           cx.fillRect(bx, by, tw + 14, 18);
-          cx.strokeStyle = "rgba(245,158,11,.45)";
+          cx.strokeStyle = "rgba(166,91,6,.5)";
           cx.strokeRect(bx, by, tw + 14, 18);
           cx.fillStyle = AMBER;
           cx.textAlign = "left";
@@ -239,7 +239,7 @@ export default function LoadCurve({
       const hv = hoverRef.current;
       if (hv >= 0) {
         const x = X(hv);
-        cx.strokeStyle = "rgba(255,255,255,.3)";
+        cx.strokeStyle = "rgba(20,22,15,.35)";
         cx.lineWidth = 1;
         cx.beginPath();
         cx.moveTo(x, PAD.t);
@@ -253,7 +253,7 @@ export default function LoadCurve({
         cx.beginPath();
         cx.arc(x, Y(lerp(LOAD_CURVE[hv], mps[hv], p)), 4, 0, Math.PI * 2);
         cx.fill();
-        cx.fillStyle = "rgba(255,255,255,.9)";
+        cx.fillStyle = "rgba(20,22,15,.85)";
         cx.font = font(10);
         cx.fillText(String(hv).padStart(2, "0") + ":00", x, PAD.t - 9);
       }

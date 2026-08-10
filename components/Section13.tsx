@@ -1,137 +1,133 @@
 "use client";
 
-import React, { useState } from 'react';
-import ContactDialog from './ContactDialog';
+import React, { useState } from "react";
+import ContactDialog from "./ContactDialog";
+import { Reveal } from "./motion/Reveal";
 
-const Section13 = () => {
+/** Footer. All contact detail preserved, restacked on the sheet. */
+export default function Section13() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
-
   return (
-    <section className="w-screen flex flex-col">
-      {/* Top area: left form + right transparent */}
-      <div className="flex flex-1 min-h-0">
-        {/* Left side — dark background with form */}
-        <div className="w-full xl:w-[55%] bg-[#0a0a0a] flex flex-col justify-between px-6 md:px-10 lg:px-16 xl:px-16 py-8 md:py-12 pt-20">
-          {/* Company info row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-white text-xs tracking-[0.15em] uppercase md:pt-12">
-            <div className="space-y-1">
-              <p className="font-bold text-white/90">Yoshinova</p>
-              <p className="text-white/50 normal-case tracking-normal text-[11px] leading-relaxed">
-                Your Energy Profitability Partner
-              </p>
+    <footer className="slide-over relative overflow-hidden bg-ink pt-20 md:pt-28">
+      <div className="mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+          {/* the ask */}
+          <Reveal dir="left">
+            <p className="t-label !text-white/45">Start here</p>
+            <h2 className="t-h2 mt-4 !text-paper font-light">
+              Start With a Free<br />Energy Audit
+            </h2>
+            <p className="mt-5 max-w-[40ch] text-[15px] leading-relaxed text-white/60">
+              We find your hidden savings first. Then we talk MPS.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2.5">
+              <button onClick={() => setIsDialogOpen(true)} className="btn btn--onInk">
+                Request Energy Audit
+              </button>
+              <a href="https://wa.me/919718204687" target="_blank" rel="noopener noreferrer" className="btn btn--onInk">
+                WhatsApp
+              </a>
             </div>
-            <div className="space-y-3">
-              <div>
-                <p className="text-white/40 mb-1">General Enquiries</p>
-                <a href="mailto:projecthead@ojasmobility.com" className="text-white/80 normal-case tracking-normal underline underline-offset-2 hover:text-white transition-colors">
-                  projecthead@ojasmobility.com
-                </a>
-              </div>
-              <div>
-                <p className="text-white/40 mb-1">New Projects</p>
-                <a href="mailto:projecthead@ojasmobility.com" className="text-white/80 normal-case tracking-normal underline underline-offset-2 hover:text-white transition-colors">
-                  projecthead@ojasmobility.com
-                </a>
-              </div>
-              <div>
-                <p className="text-white/40 mb-1">Phone</p>
-                <a href="tel:+919718204687" className="text-white/80 normal-case tracking-normal underline underline-offset-2 hover:text-white transition-colors block">
-                  +91 97182 04687
-                </a>
-              </div>
-            </div>
-            <div className="space-y-3">
-              <div>
-                <p className="text-white/40 mb-1">Address</p>
-                <p className="text-white/80 normal-case tracking-normal text-[11px] leading-relaxed">
-                  Ojas Mobility LLP, Part-B, Plot No. 103, Udyog Vihar, Delhi-Rohtak Road, Vill-Sankhol, Bahadurgarh -124507, Haryana
-                </p>
-              </div>
-              <div>
-                <p className="text-white/40 mb-1">Follow</p>
-                <a href="https://www.linkedin.com/company/yoshinova/" target="_blank" rel="noopener noreferrer" className="text-white/80 normal-case tracking-normal underline underline-offset-2 hover:text-white transition-colors">LinkedIn</a>
-              </div>
-            </div>
-          </div>
+            <p className="mt-10 text-[15px] leading-relaxed text-white/50">
+              Energy Audit → Right-sized MPS → Permanent cost reduction.
+            </p>
+          </Reveal>
 
-          {/* Energy Audit CTA */}
-          <div className="space-y-4 md:space-y-6 mt-8 p-5 md:p-6 lg:p-8 bg-white/5 border border-white/20 backdrop-blur-sm">
-            <h3 className="text-white text-[clamp(1.125rem,2.4vw,1.5rem)] helvetica font-light tracking-wide mb-2">
-              Start With a Free Energy Audit
-            </h3>
-            <p className="text-white/70 text-sm leading-relaxed mb-4">We find your hidden savings first. Then we talk MPS.</p>
-            <button
-              onClick={() => setIsDialogOpen(true)}
-              className="btn-slide btn-slide--light inline-block px-5 py-2.5 md:px-6 md:py-3 border border-white/60 text-white text-xs md:text-sm uppercase tracking-widest"
-            >
-              Request Energy Audit
-            </button>
-          </div>
+          {/* the details */}
+          <Reveal dir="right" delay={100}>
+            <dl className="grid gap-8 sm:grid-cols-2">
+              <div>
+                <dt className="t-label !text-white/40">Yoshinova</dt>
+                <dd className="mt-2 text-[13px] leading-relaxed text-white/70">
+                  Your Energy Profitability Partner
+                </dd>
+              </div>
+              <div>
+                <dt className="t-label !text-white/40">General Enquiries</dt>
+                <dd className="mt-2">
+                  <a href="mailto:projecthead@ojasmobility.com" className="text-[13px] text-white/80 underline underline-offset-4 transition-colors hover:text-brand">
+                    projecthead@ojasmobility.com
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="t-label !text-white/40">New Projects</dt>
+                <dd className="mt-2">
+                  <a href="mailto:projecthead@ojasmobility.com" className="text-[13px] text-white/80 underline underline-offset-4 transition-colors hover:text-brand">
+                    projecthead@ojasmobility.com
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="t-label !text-white/40">Phone</dt>
+                <dd className="mt-2">
+                  <a href="tel:+919718204687" className="text-[13px] text-white/80 underline underline-offset-4 transition-colors hover:text-brand">
+                    +91 97182 04687
+                  </a>
+                </dd>
+              </div>
+              <div className="sm:col-span-2">
+                <dt className="t-label !text-white/40">Address</dt>
+                <dd className="mt-2 max-w-[46ch] text-[13px] leading-relaxed text-white/70">
+                  Ojas Mobility LLP, Part-B, Plot No. 103, Udyog Vihar,
+                  Delhi-Rohtak Road, Vill-Sankhol, Bahadurgarh -124507, Haryana
+                </dd>
+              </div>
+              <div>
+                <dt className="t-label !text-white/40">Follow</dt>
+                <dd className="mt-2">
+                  <a href="https://www.linkedin.com/company/yoshinova/" target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/80 underline underline-offset-4 transition-colors hover:text-brand">
+                    LinkedIn
+                  </a>
+                </dd>
+              </div>
+            </dl>
+          </Reveal>
+        </div>
 
-          {/* Bottom tagline */}
-          <p className="text-white text-sm md:text-base lg:text-lg tracking-wide leading-relaxed max-w-2xl mt-8 font-light">
-            Energy Audit &rarr; Right-sized MPS &rarr; Permanent cost reduction.
+        {/* wordmark */}
+        <div className="relative mt-20 overflow-hidden border-t border-white/12 pt-10">
+          <p
+            aria-hidden
+            className="select-none text-center text-transparent"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(3rem, 15vw, 13rem)",
+              // leading-[0.78] cropped the caps inside the overflow-hidden
+              // parent; 1.02 with a touch of top padding clears them.
+              lineHeight: 1.02,
+              paddingTop: "0.06em",
+              letterSpacing: "-0.04em",
+              backgroundImage: "linear-gradient(to bottom, rgba(245,245,242,.85), rgba(245,245,242,.04))",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+            }}
+          >
+            YOSHINOVA
           </p>
         </div>
 
-        {/* Right side — transparent to show 3D model */}
-        {/* Was transparent onto the 3D scene; now solid so the footer reads
-            as one dark block instead of fading into white. */}
-        <div className="hidden xl:block xl:w-[45%] bg-[#0a0a0a]" />
-      </div>
-
-      {/* Bottom — giant YOSHINOVA text */}
-      {/* `height: 35%` resolved against a parent that is no longer full-height,
-          which collapsed this to nothing. It sizes to its own content now.
-          `hidden lg:block` also fought the `flex` on the same element. */}
-      <div className="hidden lg:flex w-full bg-[#0a0a0a] items-end overflow-hidden relative pt-14">
-        <h1
-          className="font-bold leading-[2] w-full text-center select-none"
-          style={{
-            fontSize: 'clamp(2.75rem, 12vw, 9rem)',
-            letterSpacing: '-0.02em',
-            marginBottom: '-0.05em',
-            background: 'linear-gradient(to bottom, #ffffff, #453f3fff, #000000)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-          }}
-        >
-          YOSHINOVA
-        </h1>
-        
-        {/* Scroll to Top Button */}
-        <button
-          onClick={scrollToTop}
-          className="absolute top-8 right-1/2 translate-x-1/2 px-6 py-3 border border-white/60 bg-white/5 backdrop-blur-sm text-white text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2 group"
-          aria-label="Scroll to top"
-        >
-          <span>Back to Top</span>
-          <svg 
-            className="w-4 h-4 transform group-hover:-translate-y-1 transition-transform duration-300" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-6 sm:flex-row">
+          <p className="t-label !text-white/35">
+            © {new Date().getFullYear()} Yoshinova. All rights reserved.
+            <a href="/privacy" className="ml-4 underline underline-offset-4 hover:!text-paper">
+              Privacy Policy
+            </a>
+          </p>
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="group t-label flex items-center gap-2 !text-white/50 transition-colors hover:!text-paper"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-          </svg>
-        </button>
+            Back to top
+            <svg className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      <ContactDialog 
-        isOpen={isDialogOpen}
-        onClose={() => setIsDialogOpen(false)}
-        type="energy-audit"
-      />
-    </section>
+      <ContactDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} type="energy-audit" />
+    </footer>
   );
-};
-
-export default Section13;
+}

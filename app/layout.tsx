@@ -57,14 +57,27 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+/**
+ * LocalBusiness rather than plain Organization.
+ *
+ * Bahadurgarh is a real address with a real phone number, and LocalBusiness
+ * is what puts you in map results — Organization alone does not. `areaServed`
+ * matters here because manufacturing is in Haryana but deployment is national.
+ *
+ * ⚠️ `openingHours` and `geo` below are reasonable defaults, NOT confirmed.
+ * Wrong hours in a map listing is worse than none — please correct before
+ * launch.
+ */
 const orgSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
+  "@id": `${SITE}/#organization`,
   name: "Yoshinova",
   url: SITE,
   logo: `${SITE}/logo_white.webp`,
+  image: `${SITE}/opengraph-image`,
   description:
-    "Energy audits and Modular Power Systems (MPS) for Indian industrial, commercial and residential facilities.",
+    "Energy audits and Modular Power Systems (MPS) for Indian industrial, commercial and residential facilities. Free floor-level audit, then a right-sized system.",
   address: {
     "@type": "PostalAddress",
     streetAddress:
@@ -74,7 +87,38 @@ const orgSchema = {
     addressRegion: "Haryana",
     addressCountry: "IN",
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 28.6926,
+    longitude: 76.9426,
+  },
   telephone: "+91-97182-04687",
+  email: "projecthead@ojasmobility.com",
+  priceRange: "₹₹₹",
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
+      opens: "09:30",
+      closes: "18:30",
+    },
+  ],
+  areaServed: { "@type": "Country", name: "India" },
+  knowsAbout: [
+    "Energy audit",
+    "Modular Power System",
+    "Battery energy storage",
+    "Peak demand charge reduction",
+    "Time-of-Day tariff",
+    "Diesel generator replacement",
+  ],
   sameAs: ["https://www.linkedin.com/company/yoshinova/"],
 };
 

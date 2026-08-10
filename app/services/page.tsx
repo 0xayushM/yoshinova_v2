@@ -3,12 +3,10 @@
 import Image from 'next/image';
 import { CurtainLink } from '@/components/Curtain';
 import { services } from '@/utils/services';
-import PageNavbar from '@/components/PageNavbar';
 
 export default function AllServicesPage() {
   return (
     <>
-      <PageNavbar isDark />
       <main className="relative min-h-screen bg-[#e8e6e1]">
       <div className="pt-24 md:pt-28 lg:pt-32 pb-16 md:pb-20 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 max-w-[1600px] mx-auto">
         <h1 className="text-center text-gray-600 text-[clamp(1.125rem,2.4vw,1.5rem)] font-bold uppercase tracking-tight mb-8 md:mb-12">

@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useRef, useEffect, useState } from 'react';
+import ContactDialog from '../ContactDialog';
 
 interface ServiceHeroProps {
   title: string;
@@ -14,6 +15,7 @@ export default function ServiceHero({ title, heroImage, heroDescription, service
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const [fontSize, setFontSize] = useState(100);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current || !textRef.current) return;
@@ -81,7 +83,29 @@ export default function ServiceHero({ title, heroImage, heroDescription, service
         <p className="text-white/70 text-sm md:text-base lg:text-lg leading-relaxed border-t border-white/20 pt-3 md:pt-4">
           {heroDescription}
         </p>
+
+        {/* Every service page used to open with a hero and no action at all.
+            The audit is the ask on all of them. */}
+        <div className="mt-6 flex flex-wrap gap-2.5">
+          <button onClick={() => setDialogOpen(true)} className="btn btn--primary">
+            Request Free Audit
+          </button>
+          <a
+            href="https://wa.me/919718204687"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn--onInk"
+          >
+            WhatsApp
+          </a>
+        </div>
       </div>
+
+      <ContactDialog
+        isOpen={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        type="energy-audit"
+      />
     </section>
   );
 }

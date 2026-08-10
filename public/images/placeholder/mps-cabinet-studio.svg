@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200" role="img" aria-label="MPS CABINET — STUDIO CUTOUT placeholder">
+  <defs>
+    <pattern id="g" width="88" height="88" patternUnits="userSpaceOnUse">
+      <path d="M88 0H0v88" fill="none" stroke="rgba(20,22,15,.07)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="1200" fill="#EDEDE8"/>
+  <rect width="1200" height="1200" fill="url(#g)"/>
+  <rect x="24" y="24" width="1152" height="1152" fill="none" stroke="rgba(20,22,15,.18)" stroke-width="2" stroke-dasharray="10 8"/>
+  <line x1="24" y1="24" x2="1176" y2="1176" stroke="rgba(20,22,15,.09)" stroke-width="1"/>
+  <line x1="1176" y1="24" x2="24" y2="1176" stroke="rgba(20,22,15,.09)" stroke-width="1"/>
+  <rect x="24" y="1092" width="1152" height="84" fill="#F5F5F2"/>
+  <text x="52" y="1136" font-family="Helvetica,Arial,sans-serif" font-size="26" font-weight="bold" fill="#14160F" letter-spacing="2">MPS CABINET — STUDIO CUTOUT</text>
+  <text x="52" y="1162" font-family="Helvetica,Arial,sans-serif" font-size="17" fill="#7C8175" letter-spacing="1">PLACEHOLDER · 1:1 · Hero / product</text>
+  <circle cx="1136" cy="1134" r="9" fill="#6A9F30"/>
+</svg>

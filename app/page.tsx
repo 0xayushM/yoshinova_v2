@@ -9,6 +9,7 @@ import AuditWalkthrough from "@/components/AuditWalkthrough";
 import AuditReport from "@/components/AuditReport";
 import Section10 from "@/components/Section10";
 import Section11 from "@/components/Section11";
+import FAQ from "@/components/FAQ";
 import Section13 from "@/components/Section13";
 
 /**
@@ -26,7 +27,7 @@ import Section13 from "@/components/Section13";
 export default function Home() {
   return (
     <main className="relative">
-      <Section1 loadingComplete />
+      <Section1 />
       <AboutSection />
       <Section2 />
       <Section3 />
@@ -38,6 +39,7 @@ export default function Home() {
 
       <Section10 />
       <Section11 />
+      <FAQ />
       <Section13 />
     </main>
   );

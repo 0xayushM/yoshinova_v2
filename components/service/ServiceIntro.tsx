@@ -30,7 +30,7 @@ export default function ServiceIntro({ title, description, bessImage }: ServiceI
 
             <button
               onClick={() => setIsDialogOpen(true)}
-              className="inline-block px-6 md:px-8 py-2.5 md:py-3 bg-[#6A9F30] text-white text-xs md:text-sm font-semibold uppercase tracking-wide hover:bg-[#5a8f20] transition-colors duration-300"
+              className="btn btn--primary"
             >
               Contact Us
             </button>
