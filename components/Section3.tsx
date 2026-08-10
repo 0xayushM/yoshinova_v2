@@ -16,7 +16,7 @@ export default function Section3() {
 
   return (
     <>
-      <section className="slide-over relative overflow-hidden bg-sheet py-20 md:py-28">
+      <section className="slide-over relative overflow-hidden bg-sheet section-y">
         <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
             <Reveal dir="left" className="order-2 lg:order-1">

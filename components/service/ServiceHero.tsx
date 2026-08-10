@@ -38,17 +38,29 @@ export default function ServiceHero({ title, heroImage, heroDescription, service
           low = mid;
         }
       }
-      setFontSize(low);
+
+      /* Fitting purely to width breaks on wide-short screens. A short title
+         like "SOLAR" on a 1440px viewport binary-searches up to ~380px,
+         which on a 768px-tall laptop leaves no room between the top offset
+         and the description pinned to the bottom — the two collide. Cap the
+         result at a share of the viewport height so the headline can never
+         claim more than about a third of the screen. */
+      const heightCap = Math.round(window.innerHeight * 0.34);
+      setFontSize(Math.min(low, heightCap));
     };
 
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(containerRef.current);
-    return () => observer.disconnect();
+    window.addEventListener("resize", resize);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", resize);
+    };
   }, [title]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full h-[100svh] overflow-hidden">
       <Image
         src={heroImage}
         alt={title}
@@ -60,7 +72,7 @@ export default function ServiceHero({ title, heroImage, heroDescription, service
 
       <div
         ref={containerRef}
-        className="absolute inset-x-0 top-32 sm:top-40 md:top-48 z-10 px-4 sm:px-6 pb-8 md:pb-16"
+        className="absolute inset-x-0 top-[max(6rem,14svh)] z-10 px-4 sm:px-6 pb-8 md:pb-16"
       >
         <h1
           ref={textRef}

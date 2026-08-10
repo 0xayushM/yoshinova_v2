@@ -10,7 +10,7 @@ import { Reveal, RevealLine } from "./motion/Reveal";
  */
 export default function AboutSection() {
   return (
-    <section className="slide-over relative overflow-hidden bg-sheet py-24 md:py-36">
+    <section className="slide-over relative overflow-hidden bg-sheet section-y-lg">
       <div className="absolute inset-0">
         <video
           className="video-paper h-full w-full object-cover"

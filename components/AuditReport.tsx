@@ -38,7 +38,7 @@ export default function AuditReport() {
 
   return (
     <>
-      <section className="slide-over relative overflow-hidden bg-sheet py-20 md:py-28">
+      <section className="slide-over relative overflow-hidden bg-sheet section-y">
         <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
           <div className="grid gap-10 xl:grid-cols-[1fr_1.05fr] xl:gap-14 xl:items-center">
 

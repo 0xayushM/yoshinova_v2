@@ -28,8 +28,15 @@ import { CurtainLink } from "./Curtain";
 type Cell = { left: number; top: number; width: number; height: number };
 
 /* where the media panel sits before anything moves — the other half of the
-   split, not a full-bleed background */
+   split, not a full-bleed background.
+
+   Three ratios, because the constraint is the headline, not the picture.
+   "PROFITABILITY" is one unbreakable 13-character word: on a 1440px screen
+   it clears 46% of the width comfortably, on a 1024–1280px laptop it does
+   not, and the word was overflowing its column. Below 1280 the paper takes
+   the larger half and the media gives way. */
 const SPLIT_DESKTOP: Cell = { left: 46, top: 0, width: 54, height: 100 };
+const SPLIT_NARROW: Cell = { left: 54, top: 0, width: 46, height: 100 };
 const SPLIT_MOBILE: Cell = { left: 0, top: 0, width: 100, height: 44 };
 const FULL: Cell = { left: 0, top: 0, width: 100, height: 100 };
 
@@ -96,21 +103,27 @@ export default function HeroMosaic() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
   const [mobile, setMobile] = useState(false);
+  const [narrow, setNarrow] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
+    // tablets and the 1366×768 / 1280×800 laptop class
+    const nq = window.matchMedia("(min-width: 768px) and (max-width: 1279px)");
     const rq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
       setMobile(mq.matches);
+      setNarrow(nq.matches);
       setReduced(rq.matches);
     };
     sync();
     mq.addEventListener("change", sync);
+    nq.addEventListener("change", sync);
     rq.addEventListener("change", sync);
     return () => {
       mq.removeEventListener("change", sync);
+      nq.removeEventListener("change", sync);
       rq.removeEventListener("change", sync);
     };
   }, []);
@@ -141,7 +154,7 @@ export default function HeroMosaic() {
 
   const START = mobile ? START_MOBILE : START_DESKTOP;
   const FINAL = mobile ? FINAL_MOBILE : FINAL_DESKTOP;
-  const SPLIT = mobile ? SPLIT_MOBILE : SPLIT_DESKTOP;
+  const SPLIT = mobile ? SPLIT_MOBILE : narrow ? SPLIT_NARROW : SPLIT_DESKTOP;
 
   const p = reduced ? 1 : progress;
   const split = easeInOutCubic(clamp01(p / 0.3));        // column exits, media widens
@@ -226,7 +239,9 @@ export default function HeroMosaic() {
           <div
             className="absolute left-0 top-0 z-10 h-full border-r border-hair bg-paper"
             style={{
-              width: mobile ? "100%" : `${SPLIT_DESKTOP.left}%`,
+              // SPLIT.left, not SPLIT_DESKTOP.left — the column and the media
+              // panel have to agree on where the seam is at every breakpoint
+              width: mobile ? "100%" : `${SPLIT.left}%`,
               top: mobile ? `${SPLIT_MOBILE.height}%` : 0,
               height: mobile ? `${100 - SPLIT_MOBILE.height}%` : "100%",
               transform: mobile
@@ -237,24 +252,40 @@ export default function HeroMosaic() {
           >
             <div className="sheet-grid absolute inset-0 opacity-70" />
 
-            <div className="relative flex h-full flex-col justify-center px-6 pt-20 pb-8 sm:px-10 md:px-12 lg:px-14">
+            {/* Every gap here is fluid against height. With fixed margins
+                (mt-6/mt-6/mt-8) plus the nav clearance, the stack needed
+                ~640px; a 1366×768 window leaves about 700px, and a shorter
+                one left the CTAs below the fold. `min-h-0` lets the column
+                actually clip rather than push the stage taller. */}
+            <div className="relative flex h-full min-h-0 flex-col justify-center px-6 pt-[max(4.5rem,10svh)] pb-[max(1.5rem,3svh)] sm:px-10 md:px-12 lg:px-14">
               <p className="t-label flex items-center gap-3">
                 <span className="h-px w-8 bg-brand" />
                 Energy Audit · MPS Deployment · India
               </p>
 
-              <h1 className="mt-6 t-display uppercase">
+              {/* balance keeps the three lines from going ragged when the
+                  column narrows; the word "Profitability" sets the floor */}
+              <h1
+                className="t-display uppercase [text-wrap:balance]"
+                style={{ marginTop: "clamp(0.75rem, 2.2svh, 1.5rem)" }}
+              >
                 <span className="block">Your Energy</span>
                 <span className="block text-brand-deep">Profitability</span>
                 <span className="block text-brand-deep">Partner</span>
               </h1>
 
-              <p className="t-lede mt-6 max-w-[40ch]">
+              <p
+                className="t-lede max-w-[40ch]"
+                style={{ marginTop: "clamp(0.75rem, 2.2svh, 1.5rem)" }}
+              >
                 We audit your floor free, then size a Modular Power System to
                 the load curve we measured. Diesel out, peak charges down.
               </p>
 
-              <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap">
+              <div
+                className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap"
+                style={{ marginTop: "clamp(1rem, 3svh, 2rem)" }}
+              >
                 <button className="btn btn--primary" onClick={() => setDialogOpen(true)}>
                   Request Free Audit
                 </button>
@@ -296,12 +327,12 @@ export default function HeroMosaic() {
           {/* ══ status pill ══ */}
           {/* desktop only — on mobile this sat on top of the hero CTAs, and
               the fixed contact bar now occupies that corner */}
-          <div className="absolute bottom-6 right-24 z-20 hidden items-center gap-2 border border-hair bg-paper/90 px-4 py-2 backdrop-blur-sm md:flex">
+          {/* <div className="absolute bottom-6 right-24 z-20 hidden items-center gap-2 border border-hair bg-paper/90 px-4 py-2 backdrop-blur-sm md:flex">
             <span className="h-1.5 w-1.5 rounded-full bg-brand" />
             <span className="t-label">
               {grid < 1 ? "Scroll · watch the zones separate" : "Six deployment zones"}
             </span>
-          </div>
+          </div> */}
         </div>
       </section>
 

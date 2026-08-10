@@ -77,14 +77,45 @@
 }
 
 @layer utilities {
-  /* ── type roles ─────────────────────────────────────────────────── */
-  .t-display { font-family: var(--font-display); font-size: clamp(2rem, 6.2vw, 5rem); line-height: 0.94; letter-spacing: -0.04em; }
-  .t-h2      { font-family: var(--font-display); font-size: clamp(1.6rem, 4.4vw, 3rem);  line-height: 1.0;  letter-spacing: -0.035em; }
-  .t-h3      { font-family: var(--font-display); font-size: clamp(1.15rem, 2.2vw, 1.6rem); line-height: 1.15; letter-spacing: -0.02em; }
-  .t-lede    { font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.55; color: var(--color-ink-2); }
-  .t-body    { font-size: clamp(0.9rem, 1.1vw, 1rem); line-height: 1.65; color: var(--color-ink-2); }
-  .t-label   { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-ink-3); }
+  /* ── type roles ─────────────────────────────────────────────────────
+     Sized against BOTH axes, not just width.
+
+     These used to be plain `clamp(min, Xvw, max)`. That is fine on a
+     phone and fine on a 16:10 MacBook, and wrong on every 16:9 Windows
+     laptop: 1366×768 is wide enough to trigger the top of the scale but
+     only ~700px tall once browser chrome is gone, so an 80px headline on
+     0.94 line-height ate half the viewport and pushed the hero CTAs off
+     screen. Same failure on any short window — a 1024×567 viewport got
+     63px display type.
+
+     The fix is `min(Xvw, Ysvh)`: whichever axis is scarcer wins.
+       · portrait phone (390×844) — vw term wins, nothing changes
+       · 16:10 laptop (1440×900)  — vw term still wins, nothing changes
+       · 16:9  laptop (1366×768)  — svh term takes over, type steps down
+       · short window (1024×567)  — svh term dominates, type steps down hard
+
+     The rem floor is untouched, so text never drops below a readable
+     size — a short viewport shrinks the display type, never the body.
+     `svh` (not `vh`) so a phone's collapsing URL bar can't resize text
+     mid-scroll. */
+  .t-display { font-family: var(--font-display); font-size: clamp(2rem, min(6.2vw, 9.6svh), 5rem); line-height: 0.94; letter-spacing: -0.04em; }
+  .t-h2      { font-family: var(--font-display); font-size: clamp(1.6rem, min(4.4vw, 6.6svh), 3rem);  line-height: 1.0;  letter-spacing: -0.035em; }
+  .t-h3      { font-family: var(--font-display); font-size: clamp(1.15rem, min(2.2vw, 3.3svh), 1.6rem); line-height: 1.15; letter-spacing: -0.02em; }
+  .t-lede    { font-size: clamp(1rem, min(1.5vw, 2.3svh), 1.2rem); line-height: 1.55; color: var(--color-ink-2); }
+  .t-body    { font-size: clamp(0.9rem, min(1.1vw, 1.7svh), 1rem); line-height: 1.65; color: var(--color-ink-2); }
+  .t-label   { font-size: clamp(9.5px, 0.72vw, 11px); letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-ink-3); }
   .tnum      { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+  /* ── section rhythm ─────────────────────────────────────────────────
+     Vertical padding was fixed (py-20/py-28 = 80/112px). On a 768px-tall
+     laptop that is ~30% of the viewport spent on air before any content.
+     `.section-y` keeps the generous rhythm on tall screens and reclaims
+     it on short ones. */
+  .section-y   { padding-block: clamp(3.5rem, min(7vw, 11svh), 7rem); }
+  .section-y-t { padding-block-start: clamp(3.5rem, min(7vw, 11svh), 7rem); }
+  .section-y-b { padding-block-end: clamp(3.5rem, min(7vw, 11svh), 7rem); }
+  /* the taller variant, for the one or two sections that carry more air */
+  .section-y-lg { padding-block: clamp(4rem, min(8.5vw, 13svh), 9rem); }
 
   /* ── the module grid: MPS is modular, so the sheet shows its cells ── */
   .sheet-grid {
@@ -186,8 +217,13 @@
 .btn {
   position: relative; isolation: isolate; overflow: hidden;
   display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
-  padding: 0.95rem 1.6rem;
-  font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  /* Fluid, but with a floor that keeps the hit area at least 44px tall —
+     the WCAG target size — so shrinking on a short laptop never makes a
+     button hard to hit. Padding was a flat 0.95rem/1.6rem, which on a
+     768px-tall screen made a row of three CTAs taller than it needed. */
+  padding: clamp(0.8rem, 1.55svh, 1.05rem) clamp(1.15rem, 2.2vw, 1.75rem);
+  min-height: 44px;
+  font-size: clamp(10.5px, 0.85vw, 12px); letter-spacing: 0.16em; text-transform: uppercase;
   border: 2px solid transparent; cursor: pointer;
   /* Only the label transitions, and it waits until the fill is most of the
      way across. The border is deliberately NOT animated — it used to change

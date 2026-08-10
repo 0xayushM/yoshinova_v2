@@ -147,7 +147,7 @@ export default function ZoneRail() {
 
 function IntroCard() {
   return (
-    <article className="w-full lg:w-[28rem] lg:shrink-0">
+    <article className="w-full lg:w-[24rem] lg:shrink-0 xl:w-[28rem]">
       <div className="flex h-full flex-col justify-center">
         <h2 className="t-h2 uppercase !text-white">MPS Deployment</h2>
         <p className="mt-5 border-t border-white/35 pt-5 text-lg text-white">
@@ -165,22 +165,31 @@ function IntroCard() {
   );
 }
 
+/**
+ * On lg+ the card is height-bound, not aspect-bound.
+ *
+ * A fixed 5:4 plate on a 30rem card produced a ~650px card, which does not
+ * fit inside the pinned 100svh rail on a 1366×768 laptop — the "View service"
+ * row was cut off. The card now takes at most 74svh and the plate is the
+ * elastic part: it gives up height first, so the spec block always keeps its
+ * content. Below lg the rail scrolls natively and the aspect ratio stands.
+ */
 function ZoneCardRail({ zone }: { zone: Zone }) {
   const { navigate } = useCurtainRouter();
 
   return (
-    <article className="w-[76vw] shrink-0 snap-start sm:w-[54vw] md:w-[24rem] lg:w-[30rem]">
+    <article className="w-[76vw] shrink-0 snap-start sm:w-[54vw] md:w-[24rem] lg:h-[min(36rem,74svh)] lg:w-[26rem] xl:w-[30rem]">
       <button
         onClick={() => navigate(`/services/${zone.slug}`)}
         className="group flex h-full w-full flex-col bg-sheet text-left transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5"
       >
         {/* plate */}
-        <span className="relative block aspect-[7/6] w-full overflow-hidden bg-paper-2 md:aspect-[5/4]">
+        <span className="relative block aspect-[7/6] w-full overflow-hidden bg-paper-2 md:aspect-[5/4] lg:aspect-auto lg:min-h-0 lg:flex-[1_1_44%]">
           <Image
             src={zone.image}
             alt={zone.title}
             fill
-            sizes="(max-width: 1024px) 76vw, 30rem"
+            sizes="(max-width: 1024px) 76vw, (max-width: 1280px) 26rem, 30rem"
             className="object-cover grayscale transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05] group-hover:grayscale-0"
             loading="lazy"
           />

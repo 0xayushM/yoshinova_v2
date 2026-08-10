@@ -15,12 +15,16 @@ import { useCurtainRouter } from "./Curtain";
  * invisible on some pages: two components, two sets of colour rules, drifting
  * apart. This is a single component with one explicit tone state.
  *
- * Tone is derived, never passed in per page:
+ * Tone is derived, never passed in per page — and it is resolved per SIDE,
+ * because the homepage hero is a split: the logo sits over the paper column
+ * while the links sit over the video half. One tone for the whole bar made
+ * the links dark-on-dark there.
  *
  *   menu open   → the mega-menu owns the screen; nav sits on it
  *   scrolled    → paper bar, ink text, hairline underneath
  *   dark hero   → transparent, white text (service pages, contact, about)
- *   light hero  → transparent, ink text (home, services listing, privacy…)
+ *   split hero  → home on desktop: ink logo (on paper), white links (on video)
+ *   light hero  → transparent, ink text (services listing, privacy…)
  *
  * The audit button is never a bare outline: it is a filled pill in every
  * state, so it cannot disappear into whatever is behind it.
@@ -50,6 +54,15 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [mobile, setMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const sync = () => setMobile(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 64);
@@ -75,15 +88,21 @@ export default function Navbar() {
   const overlayOpen = menuOpen || mobileOpen;
   const hoveringPlate = hovered !== null;
 
-  /* one decision, used everywhere below */
-  const light =
-    overlayOpen
-      ? hoveringPlate // menu open: plate images are dark, the sheet is light
-      : scrolled
-        ? false
-        : hasDarkHero(pathname);
+  /* The home hero is a split — paper column left, video right — so on
+     desktop the logo and the links sit on opposite backgrounds. On mobile
+     that hero stacks (media on top), so both sit on the media. */
+  const homeSplit = pathname === "/" && !scrolled && !overlayOpen;
 
-  const ink = light ? "#FFFFFF" : "#14160F";
+  const base = overlayOpen
+    ? hoveringPlate // menu open: plate images are dark, the bare sheet is light
+    : scrolled
+      ? false
+      : hasDarkHero(pathname);
+
+  const logoLight = homeSplit ? mobile : base;
+  const linksLight = homeSplit ? true : base;
+
+  const ink = linksLight ? "#FFFFFF" : "#14160F";
   const go = (href: string) => {
     setMenuOpen(false);
     setMobileOpen(false);
@@ -113,7 +132,7 @@ export default function Navbar() {
               priority
               className="h-9 w-auto object-contain transition-[filter] duration-500 md:h-10"
               // the mark is white artwork; invert it when the bar is light
-              style={{ filter: light ? "none" : "invert(1)" }}
+              style={{ filter: logoLight ? "none" : "invert(1)" }}
             />
           </button>
 

@@ -32,13 +32,19 @@ export default function AboutPage() {
           low = mid;
         }
       }
-      setFontSize(low);
+      // same width-only fit problem as ServiceHero: cap against height so a
+      // short word on a wide-short laptop can't fill the whole screen
+      setFontSize(Math.min(low, Math.round(window.innerHeight * 0.3)));
     };
 
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(containerRef.current);
-    return () => observer.disconnect();
+    window.addEventListener("resize", resize);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
   return (

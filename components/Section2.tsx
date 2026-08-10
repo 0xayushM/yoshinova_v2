@@ -35,7 +35,7 @@ export default function Section2() {
 
   return (
     <>
-      <section className="slide-over relative overflow-hidden bg-paper py-20 md:py-28">
+      <section className="slide-over relative overflow-hidden bg-paper section-y">
         <div className="sheet-grid pointer-events-none absolute inset-0 opacity-60" />
 
         <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">

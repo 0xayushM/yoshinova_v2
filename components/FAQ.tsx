@@ -30,7 +30,7 @@ export default function FAQ() {
   return (
     <section
       id="faq"
-      className="slide-over relative overflow-hidden bg-paper py-20 md:py-28"
+      className="slide-over relative overflow-hidden bg-paper section-y"
     >
       <div className="sheet-grid pointer-events-none absolute inset-0 opacity-60" />
 

@@ -22,7 +22,7 @@ export default function Section10() {
 
   return (
     <>
-      <section className="slide-over relative overflow-hidden bg-ink py-24 md:py-32">
+      <section className="slide-over relative overflow-hidden bg-ink section-y-lg">
         <div className="relative z-10 mx-auto max-w-[1500px] px-5 sm:px-8 md:px-10 lg:px-14">
           <Reveal dir="none">
             <p className="t-label !text-white/45">Why Yoshinova</p>
