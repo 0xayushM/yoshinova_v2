@@ -9,7 +9,7 @@ import { Reveal, RevealLine } from "./motion/Reveal";
 const STEPS = [
   { n: "01", t: "Your day today", d: "One evening peak sets the demand charge on your whole month. The genset covers the rest." },
   { n: "02", t: "What the audit finds", d: "Every leak pinned to the hour it happens, priced per month." },
-  { n: "03", t: "After a right-sized MPS", d: "Charges cheap, discharges through your peak. The genset stays off." },
+  { n: "03", t: "After a right-sized MPS", d: "Charges cheap, discharges through your peak. The genset only fires for long outages." },
 ] as const;
 
 const STEP_SECONDS = 7;
@@ -198,7 +198,7 @@ export default function AuditWalkthrough() {
                   Instrument readings, not industry averages.
                 </p>
                 <button onClick={() => setDialogOpen(true)} className="btn btn--primary shrink-0">
-                  Get this report for your floor — free
+                  Get this report for your floor
                 </button>
               </div>
             </div>

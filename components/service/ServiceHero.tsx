@@ -100,7 +100,7 @@ export default function ServiceHero({ title, heroImage, heroDescription, service
             The audit is the ask on all of them. */}
         <div className="mt-6 flex flex-wrap gap-2.5">
           <button onClick={() => setDialogOpen(true)} className="btn btn--primary">
-            Request Free Audit
+            Book an Energy Audit
           </button>
           <a
             href="https://wa.me/919718204687"

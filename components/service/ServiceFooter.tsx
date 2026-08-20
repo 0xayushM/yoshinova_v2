@@ -10,7 +10,7 @@ export default function ServiceFooter() {
           <div className="sm:col-span-2 md:col-span-2">
             <h3 className="text-white text-xl md:text-2xl font-bold uppercase tracking-tight mb-3 md:mb-4">YOSHINOVA</h3>
             <p className="text-white/60 text-sm leading-relaxed mb-4 md:mb-6 max-w-md">
-              India's MSME Energy Profitability Partner. We audit first, then deploy cutting-edge Modular Power Systems tailored for your business.
+              India's MSME Energy Profitability Partner. We audit first, then deploy cutting-edge Machine Protection Systems tailored for your business.
             </p>
           </div>
           

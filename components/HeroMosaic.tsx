@@ -278,7 +278,7 @@ export default function HeroMosaic() {
                 className="t-lede max-w-[40ch]"
                 style={{ marginTop: "clamp(0.75rem, 2.2svh, 1.5rem)" }}
               >
-                We audit your floor free, then size a Modular Power System to
+                We audit your floor, then size a Machine Protection System to
                 the load curve we measured. Diesel out, peak charges down.
               </p>
               <div className="opacity-0 md:hidden" style={{ marginTop: "clamp(1rem, 3svh, 2rem)" }}>
@@ -292,7 +292,7 @@ export default function HeroMosaic() {
                 style={{ marginTop: "clamp(1rem, 3svh, 2rem)" }}
               >
                 <button className="btn btn--primary" onClick={() => setDialogOpen(true)}>
-                  Request Free Audit
+                  Book an Energy Audit
                 </button>
                 <CurtainLink href="/contact" className="btn btn--outline">
                   Contact Us

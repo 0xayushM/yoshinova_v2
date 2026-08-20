@@ -11,17 +11,17 @@ const SITE = "https://www.yoshinova.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: {
-    default: "Yoshinova — Energy Audits & Modular Power Systems for Indian Industry",
+    default: "Yoshinova — Energy Audits & Machine Protection Systems for Indian Industry",
     template: "%s | Yoshinova",
   },
   description:
-    "Free floor-level energy audit, then a right-sized Modular Power System (MPS). Cut peak demand charges, replace diesel at ₹25–28/unit, and size storage on your real load curve. Kundli, Haryana.",
+    "Floor-level energy audit, then a right-sized Machine Protection System (MPS). Cut peak demand charges, replace diesel at ₹25–28/unit, and size storage on your real load curve. Bahadurgarh, Haryana.",
   /* MPS is the brand term now, but buyers who've been quoted by competitors
      still search "BESS" and "battery energy storage". Keeping both here
      costs nothing and protects the search traffic through the rename. */
   keywords: [
     "energy audit India",
-    "modular power system",
+    "machine protection system",
     "MPS",
     "battery energy storage system",
     "BESS India",
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     locale: "en_IN",
     title: "We don't estimate your bill. We measure it.",
     description:
-      "A free energy audit finds every leak on your floor — then we size a Modular Power System against your real load curve.",
+      "An energy audit finds every leak on your floor — then we size a Machine Protection System against your real load curve.",
   },
   twitter: {
     card: "summary_large_image",
     title: "We don't estimate your bill. We measure it.",
     description:
-      "Free energy audit, then a right-sized Modular Power System, sized on your real load curve.",
+      "An energy audit, then a right-sized Machine Protection System, sized on your real load curve.",
   },
   robots: { index: true, follow: true },
   icons: { icon: "/logo_white.ico", apple: "/logo_white.webp" },
@@ -77,7 +77,7 @@ const orgSchema = {
   logo: `${SITE}/logo_white.webp`,
   image: `${SITE}/opengraph-image`,
   description:
-    "Energy audits and Modular Power Systems (MPS) for Indian industrial, commercial and residential facilities. Free floor-level audit, then a right-sized system.",
+    "Energy audits and Machine Protection Systems (MPS) for Indian industrial, commercial and residential facilities. Floor-level audit, then a right-sized system.",
   address: {
     "@type": "PostalAddress",
     streetAddress:
@@ -113,7 +113,7 @@ const orgSchema = {
   areaServed: { "@type": "Country", name: "India" },
   knowsAbout: [
     "Energy audit",
-    "Modular Power System",
+    "Machine Protection System",
     "Battery energy storage",
     "Peak demand charge reduction",
     "Time-of-Day tariff",

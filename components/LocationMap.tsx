@@ -29,7 +29,7 @@ export default function LocationMap() {
     <section className="border border-hair bg-sheet">
       <div className="flex flex-wrap items-center justify-between gap-3 rule-b px-5 py-3.5">
         <span className="t-label">Plate 03 — site location</span>
-        <span className="t-label !text-brand-deep">Kundli · Bahadurgarh, Haryana</span>
+        <span className="t-label !text-brand-deep">Bahadurgarh, Haryana</span>
       </div>
 
       <div className="grid lg:grid-cols-[1.25fr_1fr]">
@@ -128,7 +128,7 @@ export default function LocationMap() {
               Get directions
             </a>
             <p className="t-label mt-3 !tracking-[0.1em] normal-case">
-              Opens in your maps app · 50,000 sq.ft, IMS certified
+              Opens in your maps app · IMS certified
             </p>
           </div>
         </div>

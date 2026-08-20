@@ -135,7 +135,7 @@ export default function AuditReport() {
 
                 <div className="mt-7 grid gap-2.5 sm:grid-cols-2">
                   <button onClick={() => setDialogOpen(true)} className="btn btn--primary w-full">
-                    Book the free audit
+                    Book your audit
                   </button>
                   <a href="https://wa.me/919718204687" target="_blank" rel="noopener noreferrer"
                     onClick={() => track("whatsapp_click", { location: "estimator" })}

@@ -94,7 +94,7 @@ export default function Section2() {
                 onClick={() => setIsDialogOpen(true)}
                 className="btn btn--onGreen mt-10 self-start"
               >
-                Get a Free Audit
+                Book an Energy Audit
               </button>
             </Reveal>
           </div>

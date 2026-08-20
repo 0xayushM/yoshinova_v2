@@ -5,8 +5,8 @@
   "heroImage": "/images/residential.webp",
   "heroDescription": "Energy independence for your home. Store solar power, cut peak-hour costs, and never worry about outages again.",
   "intro": {
-    "title": "NovaVault: Residential Modular Power System",
-    "description": "NovaVault is a compact, intelligent Modular Power System designed for residential applications. Store solar energy during the day and use it at night, reduce peak-hour electricity costs, and ensure your home stays powered during outages. With seamless solar integration and smart energy management, NovaVault gives you complete control over your household energy consumption.",
+    "title": "NovaVault: Residential Machine Protection System",
+    "description": "NovaVault is a compact, intelligent Machine Protection System designed for residential applications. Store solar energy during the day and use it at night, reduce peak-hour electricity costs, and ensure your home stays powered during outages. With seamless solar integration and smart energy management, NovaVault gives you complete control over your household energy consumption.",
     "bessImage": "/images/residential_bess.webp",
     "brochureUrl": "/brochures/residential-bess.pdf"
   },
@@ -47,7 +47,7 @@
     "heading": "Simple, Professional, Hassle-Free",
     "description": "Our team handles everything from initial energy assessment and system sizing to installation and commissioning. Most residential systems are up and running within 2-3 days.",
     "benefits": [
-      "Free energy assessment",
+      "Energy assessment",
       "2-3 day installation",
       "Full compliance & training"
     ],
@@ -78,7 +78,7 @@
   "cta": {
     "label": "GET STARTED",
     "heading": "Ready To Take Control Of Your Energy?",
-    "description": "Schedule a free home energy assessment and discover how much you can save with a customized MPS solution.",
+    "description": "Schedule a home energy assessment and discover how much you can save with a customized MPS solution.",
     "primaryButton": {
       "text": "Request Assessment",
       "link": "/contact"

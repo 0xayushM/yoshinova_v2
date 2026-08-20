@@ -9,7 +9,7 @@ import { Reveal, RevealLine } from "./motion/Reveal";
 const PILLARS = [
   { no: "01", title: "Chief Energy Advisor", description: "Every audit personally led. No juniors, no guesswork.", metric: "1:1", metricLabel: "Senior-led audits" },
   { no: "02", title: "Data-Driven Deployment", description: "MPS sized on your real load curve. ROI guaranteed, not estimated.", metric: "100%", metricLabel: "Real-data sizing" },
-  { no: "03", title: "MSME-First Approach", description: "Built for India's industrial backbone — accessible, practical, proven.", metric: "50K+", metricLabel: "sq.ft factory" },
+  { no: "03", title: "MSME-First Approach", description: "Built for India's industrial backbone — accessible, practical, proven.", metric: "In-house", metricLabel: "Assembly & R&D" },
 ];
 
 const BADGES = [
@@ -75,7 +75,7 @@ export default function Section11() {
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper-2">
                   <Image
                     src="/images/residential2.webp"
-                    alt="Yoshinova manufacturing facility, Kundli"
+                    alt="Yoshinova manufacturing facility, Bahadurgarh"
                     fill
                     sizes="(max-width: 1280px) 100vw, 45vw"
                     className="object-cover"
@@ -87,12 +87,12 @@ export default function Section11() {
                       <p className="text-sm text-ink">Operational</p>
                     </div>
                     <p className="mt-1.5 text-[11.5px] leading-snug text-ink-2">
-                      50,000 sq.ft IMS-certified facility — Kundli, Haryana
+                      IMS-certified facility — Bahadurgarh, Haryana
                     </p>
                   </div>
                 </div>
                 <figcaption className="t-label mt-3 flex items-center justify-between">
-                  <span>Manufacturing — Kundli, Haryana</span>
+                  <span>Manufacturing — Bahadurgarh, Haryana</span>
                   <span className="text-brand-deep">Lithium-ion MPS, assembled in-house</span>
                 </figcaption>
               </figure>
