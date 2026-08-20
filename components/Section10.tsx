@@ -39,7 +39,7 @@ export default function Section10() {
               guarantee ROI instead of promising it.
             </p>
             <button onClick={() => setIsDialogOpen(true)} className="btn btn--onInk mt-9">
-              Start With a Free Audit
+              Start With an Audit
             </button>
           </Reveal>
         </div>

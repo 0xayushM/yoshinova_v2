@@ -292,7 +292,7 @@ export default function Navbar() {
             }}
             className="btn btn--primary mt-8 w-full"
           >
-            Request Free Audit
+            Book an Energy Audit
           </button>
           </div>
         </div>

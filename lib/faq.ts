@@ -3,10 +3,9 @@
  * them. These are written to be answered plainly — an FAQ that dodges reads
  * worse than no FAQ.
  *
- * ⚠️ NEEDS YOUR SIGN-OFF. Three answers below are my best reconstruction from
+ * ⚠️ NEEDS YOUR SIGN-OFF. Two answers below are my best reconstruction from
  * the service-page copy and are marked inline. Specifically:
  *   · how long the audit takes on site
- *   · whether you handle DISCOM approvals and net-metering paperwork
  *   · warranty terms
  * Correct them before launch — a wrong answer here costs more than a missing
  * one, because it gets quoted back to you in a sales call.
@@ -22,7 +21,7 @@ export interface Faq {
 export const FAQS: Faq[] = [
   {
     q: "What does the energy audit cost?",
-    a: "Nothing. Our Chief Energy Advisor walks your floor, pulls 30 days of interval data from your meter, and hands you a report with every finding priced per month. The report is yours whether or not you ever buy hardware from us — and several findings usually cost nothing to fix, which we will tell you about.",
+    a: "There is a modest charge, and it scales with your facility — meter count, floor area and how many load points we instrument — so we can only quote it once we understand your site. It is deliberately small: most reports pay for themselves several times over, and several findings usually cost nothing to fix. Our Chief Energy Advisor walks your floor, pulls 30 days of interval data from your meter, and hands you a report with every finding priced per month — and it is yours whether or not you ever buy hardware from us.",
   },
   {
     q: "How long does the audit take?",
@@ -31,7 +30,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "What is an MPS, and how is it different from a BESS?",
-    a: "MPS stands for Modular Power System. It is the same underlying technology as a battery energy storage system — lithium-iron-phosphate cells, a battery management system, an inverter — but sized and built in modules against your measured load curve rather than sold as a fixed catalogue product. If you have been quoted for a BESS elsewhere, you are comparing like with like.",
+    a: "MPS stands for Machine Protection System. It is the same underlying technology as a battery energy storage system — lithium-iron-phosphate cells, a battery management system, an inverter — but sized and built in modules against your measured load curve rather than sold as a fixed catalogue product. If you have been quoted for a BESS elsewhere, you are comparing like with like.",
   },
   {
     q: "What is the payback period?",
@@ -39,12 +38,7 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Do I have to buy anything after the audit?",
-    a: "No, and we would rather you did not if the numbers do not work. The audit exists because sizing a system on industry averages is guesswork, and we would rather lose a sale than deploy something that will not pay back.",
-  },
-  {
-    q: "Do you handle DISCOM approvals and net-metering paperwork?",
-    a: "Yes. Behind-the-meter storage generally needs DISCOM intimation rather than full net-metering approval, and we handle that filing as part of the deployment. Requirements vary by state — we confirm what yours needs during the audit.",
-    needsConfirmation: true,
+    a: "Usually a few things, yes. The audit almost always surfaces fixes and upgrades worth installing, and your advisor will recommend the specific ones that matter for your floor. But nothing is recommended on faith — each one is costed against the savings and efficiency it unlocks, so the return easily justifies the spend before you commit. We recommend only what pays back; if something does not on your site, we will tell you to skip it.",
   },
   {
     q: "Will installation interrupt production?",
@@ -57,6 +51,6 @@ export const FAQS: Faq[] = [
   },
   {
     q: "Where do you operate?",
-    a: "Across India, manufacturing from our 50,000 sq.ft IMS-certified facility in Kundli, Haryana. We have deployed from Pune to Pithampur; if you are unsure whether we cover your location, ask — we will tell you straight.",
+    a: "Across India, manufacturing from our IMS-certified facility in Bahadurgarh, Haryana. We have deployed from Pune to Pithampur; if you are unsure whether we cover your location, ask — we will tell you straight.",
   },
 ];

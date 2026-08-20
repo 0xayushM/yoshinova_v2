@@ -16,7 +16,7 @@ export default function Section13() {
           <Reveal dir="left">
             <p className="t-label !text-white/45">Start here</p>
             <h2 className="t-h2 mt-4 !text-paper font-light">
-              Start With a Free<br />Energy Audit
+              Start With an<br />Energy Audit
             </h2>
             <p className="mt-5 max-w-[40ch] text-[15px] leading-relaxed text-white/60">
               We find your hidden savings first. Then we talk MPS.

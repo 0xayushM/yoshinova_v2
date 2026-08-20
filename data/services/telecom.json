@@ -39,7 +39,7 @@
     {
       "icon": "🌱",
       "title": "Zero Emissions",
-      "description": "Eliminate diesel emissions and noise pollution completely."
+      "description": "Cut diesel emissions and noise pollution to a fraction of a DG-run site."
     }
   ],
   "installation": {
@@ -78,7 +78,7 @@
   "cta": {
     "label": "GET STARTED",
     "heading": "Ensure Network Reliability",
-    "description": "Schedule a free tower site assessment and discover how MPS can improve uptime while reducing costs.",
+    "description": "Schedule a tower site assessment and discover how MPS can improve uptime while reducing costs.",
     "primaryButton": {
       "text": "Request Assessment",
       "link": "/contact"

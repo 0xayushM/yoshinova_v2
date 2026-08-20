@@ -19,7 +19,7 @@ const telecomUseCases = [
     number: 'Site 01',
     title: 'Macro Sites — Urban',
     description:
-      'Dense city loads, frequent micro-cuts, no room for noisy DG. Replace the genset entirely with NovaConnect — silent, always on.',
+      'Dense city loads, frequent micro-cuts, no room for noisy DG. NovaConnect carries the site silently and drops the genset to a rare backup role.',
     metric: '0 dB',
     metricLabel: 'noise emitted',
   },

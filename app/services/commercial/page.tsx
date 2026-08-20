@@ -197,7 +197,7 @@ export default function CommercialPage() {
             }}
             bullets={[
               'BEE\'s C&I energy benchmarking now penalises high peak demand factor (PDF) — MPS directly improves the score.',
-              'Green Building (LEED v4.1, IGBC) credits for resilient, low-emission backup — replaces 100% of DG kWh.',
+              'Green Building (LEED v4.1, IGBC) credits for resilient, low-emission backup — displaces most DG kWh, with the genset held for extended outages.',
               'Net-metering caps cleared in most states, letting MPS+solar export at peak with full tariff credit.',
             ]}
           />

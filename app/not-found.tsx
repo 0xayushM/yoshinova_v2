@@ -12,7 +12,7 @@ export const metadata: Metadata = {
  * phone number — the fastest route out of a dead end is a person.
  */
 const LINKS = [
-  { href: "/services/energy-audit", label: "Energy Audit", note: "What we do first, and it's free" },
+  { href: "/services/energy-audit", label: "Energy Audit", note: "What we do first" },
   { href: "/services", label: "MPS Deployment", note: "All six deployment zones" },
   { href: "/about", label: "About Yoshinova", note: "The factory, the certifications, the team" },
   { href: "/contact", label: "Contact", note: "Reply within one working day" },

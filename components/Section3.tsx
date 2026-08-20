@@ -54,7 +54,7 @@ export default function Section3() {
                 </p>
                 <p className="t-body mt-5 max-w-[46ch]">
                   Our Chief Energy Advisor walks your floor and prices every
-                  leak he finds. Free, and the report is yours either way.
+                  leak he finds. The report is yours either way.
                 </p>
 
                 <div className="mt-8 flex flex-wrap gap-2.5">

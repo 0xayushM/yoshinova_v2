@@ -5,8 +5,8 @@
   "heroImage": "/images/commercial.webp",
   "heroDescription": "Smart energy storage for office buildings, retail centers, and commercial properties. Lower operating costs while enhancing tenant value.",
   "intro": {
-    "title": "NovaBizGuard: Commercial & Industrial Modular Power System",
-    "description": "NovaBizGuard is a modular Modular Power System (MPS) designed for commercial and industrial customers. NovaBizGuard helps cut demand charges, reduce diesel generator (DG) dependency, lower electricity bills by up to 50%, stabilize power supply, and unlock reliable EV charging and solar + MPS solutions across factories, buildings, and microgrids.",
+    "title": "NovaBizGuard: Commercial & Industrial Machine Protection System",
+    "description": "NovaBizGuard is a modular Machine Protection System (MPS) designed for commercial and industrial customers. NovaBizGuard helps cut demand charges, reduce diesel generator (DG) dependency, lower electricity bills by up to 50%, stabilize power supply, and unlock reliable EV charging and solar + MPS solutions across factories, buildings, and microgrids.",
     "bessImage": "/images/commercial_bess.webp",
     "brochureUrl": "/brochures/commercial-bess.pdf"
   },
@@ -78,7 +78,7 @@
   "cta": {
     "label": "GET STARTED",
     "heading": "Transform Your Commercial Property",
-    "description": "Schedule a free building energy assessment and discover how MPS can reduce operating costs and increase property value.",
+    "description": "Schedule a building energy assessment and discover how MPS can reduce operating costs and increase property value.",
     "primaryButton": {
       "text": "Request Assessment",
       "link": "/contact"

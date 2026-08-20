@@ -315,7 +315,7 @@ export default function LoadCurve({
       role="img"
       aria-label={`24-hour industrial load profile. Peak demand ${PEAK_KW} kW today, reduced roughly ${Math.round(
         100 * 0.4,
-      )} percent by a right-sized Modular Power System, with diesel hours eliminated.`}
+      )} percent by a right-sized Machine Protection System, with diesel hours cut to a minimum.`}
       onMouseMove={(e) => !reducedMotion && scrub(e.clientX)}
       onMouseLeave={() => (hoverRef.current = -1)}
       onTouchStart={(e) => scrub(e.touches[0].clientX)}

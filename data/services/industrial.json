@@ -5,8 +5,8 @@
   "heroImage": "/images/industrial.webp",
   "heroDescription": "Industrial-scale energy storage that cuts costs, improves power quality, and keeps production running without interruption.",
   "intro": {
-    "title": "NovaMax: Heavy-Duty Modular Power System",
-    "description": "NovaMax is a high-capacity, industrial-grade Modular Power System engineered for manufacturing plants, processing facilities, and heavy industrial operations. Cut demand charges by up to 40%, eliminate diesel dependency, stabilize power quality for sensitive equipment, and ensure zero-downtime production. Built to handle the most demanding industrial loads with proven reliability and rapid ROI.",
+    "title": "NovaMax: Heavy-Duty Machine Protection System",
+    "description": "NovaMax is a high-capacity, industrial-grade Machine Protection System engineered for manufacturing plants, processing facilities, and heavy industrial operations. Cut demand charges by up to 40%, sharply reduce diesel dependency, stabilize power quality for sensitive equipment, and ensure zero-downtime production. Built to handle the most demanding industrial loads with proven reliability and rapid ROI.",
     "bessImage": "/images/industrial_bess.webp",
     "brochureUrl": "/brochures/industrial-bess.pdf"
   },
@@ -78,7 +78,7 @@
   "cta": {
     "label": "GET STARTED",
     "heading": "Power Your Industrial Operations",
-    "description": "Schedule a free facility energy assessment and discover how MPS can reduce costs and improve reliability.",
+    "description": "Schedule a facility energy assessment and discover how MPS can reduce costs and improve reliability.",
     "primaryButton": {
       "text": "Request Assessment",
       "link": "/contact"

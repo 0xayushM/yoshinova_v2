@@ -264,7 +264,7 @@ export default function IndustrialPage() {
                   Built for India's industrial backbone
                 </p>
                 <h3 className="text-white text-2xl md:text-4xl lg:text-5xl font-medium uppercase max-w-3xl leading-tight">
-                  Engineered in Kundli. Proven on factory floors from Pune to Pithampur.
+                  Engineered in Bahadurgarh. Proven on factory floors from Pune to Pithampur.
                 </h3>
               </div>
             </div>
